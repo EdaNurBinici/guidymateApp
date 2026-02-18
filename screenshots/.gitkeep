@@ -1,0 +1,27 @@
+# Screenshots Directory
+
+Add your application screenshots here:
+
+1. landing.png - Landing page with theme selection
+2. ai-coach.png - AI chat interface
+3. roadmap.png - Personalized learning roadmap
+4. focus-timer.png - Pomodoro timer with backgrounds
+5. profile.png - User profile management
+
+## Screenshot Guidelines
+
+- Use PNG format for better quality
+- Recommended size: 1920x1080 or 1280x720
+- Capture in light mode for consistency
+- Include relevant UI elements
+- Avoid sensitive user data
+
+## How to Take Screenshots
+
+1. Open the application in your browser
+2. Navigate to the desired page
+3. Use browser's screenshot tool or:
+   - Windows: Win + Shift + S
+   - Mac: Cmd + Shift + 4
+4. Save with descriptive filename
+5. Add to this directory

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "express-session": "^1.19.0",
+    "nodemailer": "^7.0.13",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "react-markdown": "^10.1.0"
+  }
+}

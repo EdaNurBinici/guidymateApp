@@ -1,0 +1,1208 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+@import './variables.css';
+
+body { 
+  margin: 0; 
+  padding: 0; 
+  font-family: var(--font-family); 
+  background: var(--gradient-primary); 
+  height: 100vh; 
+  overflow: hidden; 
+  color: var(--gray-800); 
+}
+
+/* TOAST */
+.toast-notification { 
+  position: fixed; 
+  top: var(--spacing-lg); 
+  right: var(--spacing-lg); 
+  background: var(--success-green); 
+  color: var(--white); 
+  padding: var(--spacing-md) var(--spacing-xl); 
+  border-radius: var(--radius-lg); 
+  box-shadow: var(--shadow-toast); 
+  z-index: var(--z-toast); 
+  font-weight: 600; 
+  animation: slideIn var(--transition-slow) ease-out; 
+}
+@keyframes slideIn { 
+  from { transform: translateX(100%); opacity: 0; } 
+  to { transform: translateX(0); opacity: 1; } 
+}
+
+/* MODAL */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(5px); }
+.modal-content { background: white; width: 90%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-height: 80vh; overflow-y: auto; border-top: 10px solid #667eea; }
+.modal-title { margin-top: 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 15px; }
+.modal-body { font-size: 1.1rem; line-height: 1.6; white-space: pre-wrap; }
+.close-modal-btn { background: #e53e3e; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; float: right; margin-top: 20px; }
+
+/* LAYOUT */
+.landing-container, .login-wrapper { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; text-align: center; color: white; }
+.login-container { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; }
+.hero-title { font-size: 4rem; margin: 0; }
+.f-box { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; width: 120px; }
+.start-btn { background: white; color: #667eea; padding: 18px 60px; border-radius: 50px; font-weight: 800; cursor: pointer; border: none; transition: 0.3s; }
+.start-btn:hover { transform: scale(1.05); }
+
+.dashboard-wrapper { display: flex; width: 100vw; height: 100vh; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+.sidebar-panel { width: 260px; background: white; display: flex; flex-direction: column; padding: 25px; box-shadow: 5px 0 25px rgba(0,0,0,0.1); z-index: 10; flex-shrink: 0; transition: 0.3s; }
+.nav-btn { padding: 12px 20px; border-radius: 12px; cursor: pointer; font-weight: 600; color: #718096; transition: 0.3s; text-align: left; overflow: hidden; white-space: nowrap; }
+.nav-btn:hover { background: #f7fafc; color: #553c9a; padding-left: 25px; }
+.nav-btn.active { background: linear-gradient(90deg, #667eea, #764ba2); color: white; padding-left: 25px; }
+
+/* ARŞİV NOTLARI (SOLDA) */
+.old-notes-section { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #e2e8f0; flex-grow: 1; overflow-y: auto; }
+.sidebar-note-item { display: flex; justify-content: space-between; padding: 10px; font-size: 0.9rem; cursor: pointer; border-radius: 8px; transition: 0.2s; white-space: nowrap; overflow: hidden; }
+.sidebar-note-item:hover { background: #fff9c4; color: #744210; }
+
+.main-content {
+  flex-grow: 1;
+  padding: 16px 8px;              /* eskiden 30px → küçült, kenarlardan az boşluk */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+.feature-boxes{
+  display: flex;
+  gap: 35px;              /* aralık */
+  justify-content: center; /* ortala */
+  flex-wrap: wrap; 
+  margin-top:20px;  
+  margin-bottom:20px;      /* mobilde taşarsa alta geçsin */
+}
+.f-box{
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  color: white;
+
+  transition: 0.25s;
+}
+
+/* Hover efekti */
+.f-box:hover{
+  transform: translateY(-2px) scale(1.03);
+
+  /* parlama */
+  box-shadow:
+    0 0 12px rgba(185, 224, 226, 0.6),
+    0 0 24px rgba(135, 30, 209, 0.4);
+}
+
+.content-card {
+  background: rgb(238, 236, 236); /* beyaz arka plan */
+  width: 100%;                    /* ← TAM GENİŞLİK */
+  max-width: 100%;                /* eskiden 1200px sınırlıydı, kaldırdık */
+  min-height: 85vh;
+  border-radius: 16px;            /* daha yumuşak köşeler */
+  padding: 20px 16px;             /* iç boşluk biraz azaltıldı */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12); /* hafif gölge */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+/* INPUTS */
+.input-group { display: flex; flex-direction: column; gap: 15px; }
+input, select, textarea { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
+.primary-btn { width: 100%; padding: 14px; background: linear-gradient(to right, #667eea, #764ba2); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; }
+
+/* COACH GRID */
+.ai-advice-box { background: white; padding: 15px; border-radius: 12px; border: 1px solid #cbd5e0; flex-grow: 1; overflow-y: auto; font-size: 0.99rem; line-height: 1.6; }
+.chat-sidebar { width: 280px; background: #f7fafc; border-right: 1px solid #e2e8f0; padding: 15px; overflow-y: auto; }
+.chat-main { flex: 1; display: flex; flex-direction: column; }
+.messages-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: white; }
+.input-zone { padding: 15px; background: #f7fafc; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; }
+.bubble { padding: 10px 15px; border-radius: 15px; max-width: 80%; font-size: 0.95rem; }
+.bubble.user { align-self: flex-end; background: #667eea; color: white; border-bottom-right-radius: 2px; }
+.bubble.assistant { align-self: flex-start; background: #edf2f7; color: #333; border-bottom-left-radius: 2px; }
+
+/* 🔥 SOHBET MENÜSÜ & LİSTESİ */
+.session-item { 
+    display: flex; justify-content: space-between; align-items: center; padding: 10px; 
+    cursor: pointer; border-radius: 8px; position: relative; border-bottom: 1px solid #edf2f7; 
+}
+.session-item:hover { background: #e2e8f0; }
+.session-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 110px; font-size: 0.85rem; font-weight: 500; }
+.session-menu-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #a0aec0; padding: 0 5px; }
+.session-menu-btn:hover { color: #2d3748; }
+
+.session-dropdown { 
+    position: absolute; right: 10px; top: 35px; background: white; border: 1px solid #e2e8f0; 
+    border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 100; overflow: hidden; display: flex; flex-direction: column; width: 120px;
+}
+.session-dropdown button { background: white; border: none; padding: 10px; text-align: left; cursor: pointer; font-size: 0.85rem; border-bottom: 1px solid #f7fafc; }
+.session-dropdown button:hover { background: #f7fafc; color: #667eea; }
+.session-dropdown button.delete-btn { color: #e53e3e; }
+.session-dropdown button.delete-btn:hover { background: #fff5f5; }
+
+/* NOTES (SAĞDAKİ BÜYÜK KARTLAR) */
+.create-note-box { background: #f8f9fa; padding: 25px; border-radius: 15px; border: 2px dashed #cbd5e0; margin-bottom: 30px; }
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 100%; }
+.note-card { background: #fff9c4; padding: 20px; border-radius: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.05); min-height: 200px; cursor: pointer; transition: 0.3s; position: relative; border-top: 5px solid #ecc94b; }
+.note-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+.note-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px; color: #744210; }
+.note-content { font-size: 0.95rem; color: #4a5568; white-space: pre-wrap; height: 130px; overflow: hidden; text-overflow: ellipsis; }
+.delete-note-btn { position: absolute; bottom: 15px; right: 15px; background: white; border: 1px solid #ecc94b; border-radius: 5px; cursor: pointer; padding: 5px 10px; color: #744210; }
+.delete-note-btn:hover { background: #ecc94b; color: white; }
+
+.profile-grid { font-size: 0.85rem;display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
+.roadmap-item { display: flex; align-items: center; padding: 15px; border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
+.roadmap-item.done { background: #f0fff4; text-decoration: line-through; color: #718096; }
+
+/* FOCUS MODE */
+.focus-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; transition: background 0.5s; }
+.timer-display { font-size: 7rem; font-weight: 800; color: #2d3748; font-variant-numeric: tabular-nums; margin: 20px 0; text-shadow: 2px 2px 0px #e2e8f0; }
+.timer-inputs { display: flex; gap: 20px; margin-bottom: 30px; background: #f7fafc; padding: 15px; border-radius: 15px; border: 1px solid #e2e8f0; }
+.timer-input-group { display: flex; flex-direction: column; align-items: center; }
+.timer-input-group label { font-size: 0.8rem; color: #718096; margin-bottom: 5px; font-weight: 600; }
+.timer-input { width: 80px; padding: 10px; text-align: center; border: 2px solid #cbd5e0; border-radius: 10px; font-weight: bold; font-size: 1.1rem; }
+.timer-controls { display: flex; gap: 15px; }
+.timer-btn { padding: 15px 40px; font-size: 1.2rem; border-radius: 30px; border: none; cursor: pointer; transition: 0.2s; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.btn-start { background: #48bb78; color: white; }
+.btn-stop { background: #e53e3e; color: white; }
+.btn-reset { background: white; border: 2px solid #e2e8f0; color: #4a5568; }
+
+
+/* =========================
+   ✅ COACH GRID (AI Koç ekranı)
+   ========================= */
+
+
+/* Sol kolon (tavsiye) */
+.advice-column{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Sağ kolon (chat) */
+.chat-column{
+  display: flex;
+  width: 100% !important;
+  height: 60vh !important;
+  max-height: none !important;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Chat sol sidebar */
+.chat-column .chat-sidebar{
+  width: 240px;
+  flex-shrink: 0;
+  background: #f7fafc;
+  border-right: 1px solid #e2e8f0;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* Chat ana */
+.chat-column .chat-main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Mesaj alanı */
+.chat-column .messages-area{
+  flex: 1;
+  min-height: 320px;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mesaj balonları */
+.chat-column .bubble{
+  max-width: 85%;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Input alanı (alttaki yazma yeri) */
+.input-zone{
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.input-zone input{
+  height: 46px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+/* Gönder butonu küçük kalmasın */
+.input-zone .primary-btn{
+  width: 52px ;
+  min-width: 52px;
+  height: 46px;
+  padding: 0 ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tavsiye kutusu taşmasın */
+.ai-advice-box{
+  min-height: 220px;
+}
+
+
+
+
+
+
+  
+  /* "Yeni Sohbet" butonu – ortala, küçült, taşmasın */
+  .chat-sidebar .primary-btn {
+    display: block;
+    width: 95%;
+    max-width: 100%;
+    margin: 0 auto 12px auto;
+    padding: 5px 6px;
+    font-size: 13.5px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Sohbet isimleri – sola yaslı, taşma önle */
+  .session-item {
+    width: 100% !important;
+    padding: 8px 6px !important;
+    font-size: 12.5px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .session-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    text-align: left !important;
+  }
+
+  .session-menu-btn {
+    flex-shrink: 0;
+    width: 24px;                    /* ← eskiden 30px → şimdi 24px (daha dar) */
+    height: 24px;                   /* yükseklik de yuvarlak olsun diye eşitledim */
+    padding: 0;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    color: #718096;
+    display: flex;                  /* ikon ortalansın */
+    align-items: left;
+    justify-content: left;
+    border-radius: 50%;             /* tam yuvarlak olsun, daha şık durur */
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+  /* Üç nokta menüsü dropdown – mobilde daha küçük */
+  .session-dropdown {
+    min-width: 50px;
+    font-size: 13px;
+  }
+
+  /* Genel temizlik */
+  .chat-sidebar button,
+  .chat-sidebar span {
+    text-align: center;
+  }
+
+/* Yeni Sohbet butonu – sola yaslı, tam genişlik */
+  @media (max-width: 768px) {
+    .new-chat-btn {
+    width: 100% !important;
+    padding: 6px 8px !important;
+    font-size: 7.1px !important;
+    margin-bottom: 12px !important;
+    text-align: left !important;         /* yazı sola yaslı */
+    justify-content: flex-start !important;
+    border-radius: 8px !important;
+  }}
+.chat-column{
+    min-height:260px;            /* telefonda daha kısa */
+    max-height: 50px;  
+    width: 100%;                  /* parent'ı tamamen kaplasın (genelde zaten böyle) */
+    max-width: 400px;              /* ortalasın – kenarlarda boşluk kalsın */
+    box-sizing: border-box;          /* çok yer kaplamasın */
+    padding: 12px;                /* iç boşluk azalsın */
+             /* yazı daha küçük */
+  }
+.primary-btn{
+    min-height: 35px;            /* TELEFON telefonda daha kısa */
+    max-height: 30px;  
+    width: 70%;                  /* parent'ı tamamen kaplasın (genelde zaten böyle) */
+    max-width: 400px;             /* geniş ekranlarda bile çok yayılmasın */
+    margin: 0 auto;               /* ortalasın – kenarlarda boşluk kalsın */
+    box-sizing: border-box;          /* çok yer kaplamasın */
+    padding: 9px;                /* iç boşluk azalsın */
+    font-size: 14px;            /* yazı daha küçük */
+  }
+@media (max-width: 768px) {
+  .ai-advice-box {
+    min-height: 10px;            /* telefonda daha kısa */
+    max-height: 350px;  
+    width: 100%;                  /* parent'ı tamamen kaplasın (genelde zaten böyle) */
+    max-width: 1500px;             /* geniş ekranlarda bile çok yayılmasın */
+    margin: 4px ;               /* ortalasın – kenarlarda boşluk kalsın */
+    box-sizing: border-box;          /* çok yer kaplamasın */
+    padding: 12px;                /* iç boşluk azalsın */
+    font-size: 11px;            /* yazı daha küçük */
+  }}
+/* --- AI TAVSİYE KUTUSU LİSTE DÜZELTMESİ --- */
+.ai-advice-box ul, 
+.ai-advice-box ol {
+    padding-left: 25px !important; /* Sol taraftan sayıların sığacağı kadar boşluk bırakır */
+    margin-left: 5px !important;   /* Kutudan biraz daha içeri iter */
+}
+
+.ai-advice-box li {
+    margin-bottom: 8px; /* Maddeler birbirine yapışmasın diye arayı açar */
+    padding-left: 5px;  /* Yazı ile numara arasına minik boşluk */
+}
+
+.ai-advice-box h3, 
+.ai-advice-box h4, 
+.ai-advice-box strong {
+    color: #2d3748; /* Başlıkları daha okunaklı koyu renk yap */
+    margin-top: 15px;
+    display: block;
+}
+  .content-card{
+    margin: 0 8px;
+    padding: 16px 10px;
+    border-radius: 16px;
+  }
+/* Masaüstü (Normal Ekran) İçin */
+.coach-grid {
+    display: flex;
+    /* Tavsiye kolonu %25, Chat kolonu %75 (İstediğin gibi değiştirebilirsin) */
+    grid-template-columns: 25% 1fr; 
+    gap: 20px;
+    width: 100% !important;
+    height: 80vh; /* Yüksekliği ekranın %80'i yapar */
+    align-items: stretch;
+}
+
+.advice-column {
+    width: 100% !important; /* Grid hücresinin içini tamamen doldurur */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #e2e8f0;
+}
+
+.chat-column {
+    width: 100% !important; /* Kalan tüm boşluğa yayılmasını sağlar */
+    display: flex;
+    border: px solid #e2e8f0;
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+}
+.sidebar-search{
+    flex: 0;
+    padding: 1px 1px;
+    font-size: 1px ;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #edf2f7;
+    color: #5b6985;
+    border: 0px solid #cbd5e0;
+    transition: all 0.2s;
+}
+  .sidebar-search input::placeholder {
+    font-size: 8.3px ;
+    letter-spacing: -0.3px;
+  }
+
+  .sidebar-search input {
+    font-size: 13px ;
+    height: 22px ;
+    padding: 6px 10px ;
+  }
+  .session-item:hover { background: #e2e8f0; }
+  .session-title { overflow: hidden; text-overflow: ellipsis; white-space: normal; max-width: 250px; font-size: 0.5rem; font-weight: 500; }
+  .session-menu-btn { background: transparent; border: none; font-size: 0.9rem; cursor: pointer; color: #a0aec0; padding: 0 10px; }
+  .session-menu-btn:hover { color: #2d3748; }
+
+  .session-dropdown { 
+    position: absolute; right: -4.9px; top: 35px; background: white; border: 1px solid #e2e8f0; 
+    border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 100; overflow: hidden; display: flex; flex-direction: column; width: 55px;
+}
+  .session-dropdown button { background: white; border: none; padding: 0.1px; text-align: center; cursor: pointer; font-size: 0.65rem; border-bottom: 1px solid #f7fafc; }
+  .session-dropdown button:hover { background: #f7fafc; color: #667eea; }
+  .session-dropdown button.delete-btn { color: #e53e3e; }
+  .session-dropdown button.delete-btn:hover { background: #fff5f5; }
+  
+/* Eski notları göster butonu */
+  .open-notes-modal-btn {
+    width: 15%;
+    padding: 15px 16px;
+    margin: 0 19px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-weight: 550;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .open-notes-modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+  }
+
+  .open-notes-modal-btn-container {
+    margin-top: 20px;
+  }
+
+/* MEDİA MEDİA MEDİA MEDİA */
+
+@media (max-width: 1000px) { .coach-grid { flex-direction: column; height: auto; } .advice-column, .chat-column { width: 100%; height: 400px; } .sidebar-panel { width: 200px; } .notes-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .sidebar-panel { width: 70px; padding: 15px 5px; align-items: center; } .nav-btn { font-size: 0; justify-content: center; } .nav-btn::first-letter { font-size: 1.5rem; } .old-notes-section { display: none; } .notes-grid { grid-template-columns: 1fr; } .timer-display { font-size: 4rem; } }
+
+@media (max-width: 768px) {.session-item { 
+    display: flex; justify-content: space-between; align-items: center; padding: 10px; 
+    cursor: pointer; border-radius: 8px; position: relative; border-bottom: 1px solid #edf2f7; 
+}
+.session-item:hover { background: #f3ebeb; }
+.session-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80px; font-size: 0.64rem; font-weight: 500; }
+.session-menu-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #a0aec0; padding: 0 5px; }
+.session-menu-btn:hover { color: #4c5991; }
+
+.session-dropdown { 
+    position: absolute; right:20px; top: 35px; background: white; border: 1px solid #e2e8f0; 
+    border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 100; overflow: hidden; display: flex; flex-direction: column; width: 2px;
+}
+.session-dropdown button { background: white; border: none; padding: 2px 2px; text-align: left; cursor: pointer; font-size: 0.55rem; border-bottom: 1px solid #f7fafc; }
+.session-dropdown button:hover { background: #f7fafc; color: #667eea; }
+.session-dropdown button.delete-btn { color: #e53e3e; }
+.session-dropdown button.delete-btn:hover { background: #fff5f5; }
+
+/* NOTES (SAĞDAKİ BÜYÜK KARTLAR) */
+.create-note-box { background: #f8f9fa; padding: 8px; border-radius: 15px; border: 2px dashed #cbd5e0; margin-bottom: 30px; }
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 100%; }
+.note-card { background: #fff9c4; padding: 20px; border-radius: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.05); min-height: 20px; cursor: pointer; transition: 0.3s; position: relative; border-top: 4px solid #ecc94b; }
+.note-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+.note-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px; color: #744210; }
+.note-content { font-size: 0.95rem; color: #4a5568; white-space: pre-wrap; height: 130px; overflow: hidden; text-overflow: ellipsis; }
+.delete-note-btn { position: absolute; bottom: 15px; right: 15px; background: white; border: 1px solid #ecc94b; border-radius: 5px; cursor: pointer; padding: 2px 4.5px; color: #744210; }
+.delete-note-btn:hover { background: #a8891b; color: white; }
+
+.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; text-align: left; }
+.profile-grid input {font-size: 0.65rem;}
+.profile-grid input,
+.profile-grid select {
+    font-size: 0.635rem !important;       /* ≈ 17-18px – rahat okunur */
+    /* veya tam piksel istersen: */
+    /* Burası Önemli: Metni kırma, serbest bırak */
+    white-space: normal !important;    /* Tek satır zorlamasını kaldır */
+    word-wrap: break-word !important;  /* Kelime sığmazsa aşağı at */
+    overflow: visible !important;      /* Gizleme yapma */
+    text-overflow: clip !important;
+    /* font-size: 17px !important; */
+    padding: 14px 12px !important;      /* kutu içinde daha ferah olsun */
+    font-weight: 200;                   /* biraz daha kalın olsun istersen */
+}
+.profile-grid ::placeholder {
+  width:200px ;
+  
+}
+.roadmap-item { display: flex; align-items: center; padding: 15px; border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
+.roadmap-item.done { background: #f0fff4; text-decoration: line-through; color: #718096; }
+@media (max-width: 768px) {
+  .roadmap-item { display: flex; align-items: center; padding: 10px; font-size: 12px;              /* ← genel yazı boyutu (görev metni) */
+    line-height: 1.2;border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
+  .roadmap-item.done { background: #f0fff4; text-decoration: line-through; color: #718096; }
+
+/* FOCUS MODE */
+.focus-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; transition: background 0.5s; }
+.timer-display { font-size: 4rem; font-weight: 800; color: #2d3748; font-variant-numeric: tabular-nums; margin: 20px 0; text-shadow: 2px 2px 0px #e2e8f0; }
+.timer-inputs { display: flex; gap: 20px; margin-bottom: 30px; background: #f7fafc; padding: 14px; border-radius: 15px; border: 1px solid #e2e8f0; }
+.timer-input-group { display: flex; flex-direction: column; align-items: center; }
+.timer-input-group label { font-size: 0.8rem; color: #718096; margin-bottom: 5px; font-weight: 600; }
+.timer-input { width: 80px; padding: 10px; text-align: center; border: 2px solid #cbd5e0; border-radius: 10px; font-weight: bold; font-size: 1.1rem; }
+.timer-controls { display: flex; gap: 15px; }
+.timer-btn { padding: 2px 7px; font-size: 1rem; border-radius: 30px; border: none; cursor: pointer; transition: 0.2s; font-weight: bold; box-shadow: 0 5px 9px rgba(0,0,0,0.1); }
+.btn-start { background: #48bb78; color: white; }
+.btn-stop { background: #e53e3e; color: white; }
+.btn-reset { background: white; border: 2px solid #eff1f4; color: #4a5568; }
+  }
+
+/* =========================
+   ✅ COACH GRID (AI Koç ekranı)
+   ========================= */
+.coach-grid {
+    grid-template-columns: 1fr;               /* tek sütun */
+    grid-template-rows: auto fr;             /* üstte tavsiye, altta chat */
+    gap: 16px;
+    min-height: 90vh; 
+                            /* ekranın çoğunu kaplasın */
+  }
+
+.advice-column {
+    padding: 16px;
+    height: 480px;
+    border-radius: 10px;
+    background: #f8fafc;
+  }
+
+  .chat-column {
+    height: 60vh;                             /* telefon ekranının %60'ı chat olsun */
+    min-height: 420px;                        /* çok küçük olmasın */
+  }
+
+  .chat-sidebar {
+    width: 140px ;              /* ← SIDEBAR GENİŞLİĞİ DARALDI */
+    max-width: 140px ;
+    padding: 12px 8px ;
+    background: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;              /* içeriği sola yasla */
+  }
+
+/* Chat sol sidebar */
+.chat-column .chat-sidebar{
+  width: 240px;
+  flex-shrink: 0;
+  background: #f7fafc;
+  border-right: 1px solid #e2e8f0;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* Chat ana */
+.chat-column .chat-main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Mesaj alanı */
+.chat-column .messages-area{
+  flex: 1;
+  min-height: 320px;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mesaj balonları */
+.chat-column .bubble{
+  max-width: 85%;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Input alanı (alttaki yazma yeri) */
+.input-zone{
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.input-zone input{
+  height: 24px;
+  padding: 11px;
+  border-radius: 12px;
+  font-size: 0.67rem;
+}
+
+/* Gönder butonu küçük kalmasın */
+.input-zone .primary-btn{
+  width: 52px ;
+  min-width: 52px;
+  height: 25px;
+  padding: 0 ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+/* Tavsiye kutusu taşmasın */
+.ai-advice-box{
+  min-height: 220px;
+}
+
+}
+@media (max-width: 768px) {
+  .bottom-nav {
+    height: 62px;
+    padding: 4px 0;
+  }
+
+  .nav-item {
+    font-size: 10px;            /* telefonda daha küçük yazı */
+    min-width: 52px;
+    padding: 3px 5px;
+  }
+
+  .nav-item .icon {
+    font-size: 1.35rem;
+    margin-bottom: 1px;
+  }
+
+  .nav-item .label {
+    font-size: 10px;
+  }
+}
+  .chat-column {
+    height: 60vh;                             /* telefon ekranının %60'ı chat olsun */
+    min-height: 400px;                        /* çok küçük olmasın */
+  }
+
+  .chat-sidebar {
+    width: 80px ;              /* ← SIDEBAR GENİŞLİĞİ DARALDI */
+    max-width: 140px ;
+    padding: 12px 8px ;
+    background: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;              /* içeriği sola yasla */
+  }
+
+/* Chat sol sidebar */
+  .chat-column .chat-sidebar{
+    width: 240px;
+    flex-shrink: 0;
+    background: #f7fafc;
+    border-right: 1px solid #e2e8f0;
+    padding: 12px;
+    overflow-y: auto;
+}
+
+/* Çok küçük ekranlar (320-400px genişlik) */
+@media (max-width: 480px) {
+  .nav-item {
+    font-size: 9.5px;
+    min-width: 48px;
+  }
+
+  .nav-item .icon {
+    font-size: 1.3rem;
+  }
+}
+  .ai-mode-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+  .ai-mode-btn,
+  .toggle-btn {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 14.5px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #edf2f7;
+    color: #5b6985;
+    border: 1px solid #cbd5e0;
+    transition: all 0.2s;
+}
+
+  .ai-mode-btn.active,
+  .toggle-btn.active {
+    background: linear-gradient(135deg, #667eea, #5a67d8);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Mobil: toggle butonları üst üste, yan yana değil */
+@media (max-width: 768px) {
+  .ai-mode-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ai-mode-btn,
+  .toggle-btn {
+    width: 50%;
+    padding: 2px ;
+    font-size: 9px;
+  }
+
+  /* Büyük ekran butonlarını mobilde gizle */
+  .desktop-buttons {
+    display: none;
+  }
+
+  /* Mobil toggle'ı göster */
+  .mobile-buttons {
+    display: flex;
+  }
+}
+
+/* Büyük ekran: desktop butonlarını göster, mobil toggle'ı gizle */
+@media (min-width: 769px) {
+  .desktop-buttons {
+    display: flex;
+  }
+
+  .mobile-buttons {
+    display: none;
+  }
+}
+
+/* MOBİLDE SOHBET MENÜSÜ – ChatGPT tarzı slide-in */
+@media (max-width: 768px) {
+  .coach-grid {
+    position: relative;
+    height: 80vh;
+    min-height: 450px;
+  }
+
+  /* Sidebar – soldan kayarak girer */
+  .chat-sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;                    /* başlangıçta gizli */
+    width: 250px;
+    height: 100%;
+    background: white;
+    border-right: 1px solid #e2e8f0;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+    padding: 16px;
+    overflow-y: auto;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .chat-sidebar.open {
+    left: 0; 
+    width: 400px !important; /* Boşluğu sildik */
+}
+
+  /* Hamburger menü butonu */
+  .mobile-chat-hamburger {
+  position: absolute;
+  top: 1.1px;
+  left: 249px;
+  z-index: 1200;                    /* en üstte olsun, hiçbir şey üstüne çıkmasın */
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 40%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: all 0.2s;
+}
+/* Menü açıkken buton biraz sağa kaymasın, sabit kalsın */
+  .chat-sidebar.open + .mobile-chat-hamburger {
+    left: 32px !important; /* sabit kalır */
+}
+
+/* Sidebar açıkken butonun arka planı değişsin (güzel gözüksün) */
+  .chat-sidebar.open ~ .mobile-chat-hamburger {
+    background: #e53e3e !important; /* kırmızı tonu – kapat butonu gibi olsun */
+}
+
+  /* Mesajlaşma alanı – menü kapalıyken tam ekran */
+ .chat-main {
+    height: 100%;
+    width: 100%;
+  }
+
+  .messages-area {
+    padding: 16px 12px;
+  }
+}
+@media (min-width: 769px) {
+  .mobile-chat-hamburger {
+    display: none !important;
+  }
+  
+  /* Ekstra temizlik: sidebar zaten açık olduğu için hamburger'a gerek yok */
+  .chat-sidebar {
+    left: 0 !important;          /* her zaman görünür */
+    position: relative !important;
+    box-shadow: none !important;
+  }
+}
+/* Bilgisayar ekranında sidebar her zaman görünür (eski hali bozulmasın) */
+@media (min-width: 769px) {
+  .mobile-hamburger,
+  .mobile-toggle-buttons {
+    display: none !important;
+  }
+
+  .chat-sidebar {
+    position: relative;
+    left: 0 !important;
+    width: 240px;
+    box-shadow: none;
+  }
+  
+
+
+/* Menü açıkken buton biraz sağa kaymasın, sabit kalsın */
+  .chat-sidebar.open + .mobile-chat-hamburger {
+    left: 32px !important; /* sabit kalır */
+}
+
+/* Sidebar açıkken butonun arka planı değişsin (güzel gözüksün) */
+  .chat-sidebar.open ~ .mobile-chat-hamburger {
+    background: #e53e3e; /* kırmızı tonu – kapat butonu gibi olsun */
+}}
+@media (min-width: 769px) {
+  .sidebar-search{
+    flex: 0;
+    padding: 3px 3px;
+    font-size: 1px ;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #edf2f7;
+    color: #5b6985;
+    border: 0px solid #cbd5e0;
+    transition: all 0.2s;
+}}
+@media (min-width: 769px) {
+    .sidebar-search input::placeholder {
+    font-size: 13.3px ;
+    letter-spacing: -0.3px;
+  }
+
+  .sidebar-search input {
+    font-size: 13px ;
+    height: 10px ;
+    padding: 6px 10px ;
+  }
+  .session-item:hover { background: #e2e8f0; }
+  .session-title { overflow: hidden; text-overflow: ellipsis; white-space: normal; max-width: 250px; font-size: 0.8rem; font-weight: 500; }
+  .session-menu-btn { background: transparent; border: none; font-size: 0.9rem; cursor: pointer; color: #a0aec0; padding: 0 10px; }
+  .session-menu-btn:hover { color: #2d3748; }
+
+  .session-dropdown { 
+    position: absolute; right: -4.9px; top: 35px; background: white; border: 1px solid #e2e8f0; 
+    border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 100; overflow: hidden; display: flex; flex-direction: column; width: 80px;
+}
+  .session-dropdown button { background: white; border: none; padding: 0.21px; text-align: center; cursor: pointer; font-size: 0.9rem; border-bottom: 1px solid #f7fafc; }
+  .session-dropdown button:hover { background: #f7fafc; color: #667eea; }
+  .session-dropdown button.delete-btn { color: #e53e3e; }
+  .session-dropdown button.delete-btn:hover { background: #fff5f5; }
+}
+/* Bottom Navigation - Yazıları küçült + daha dengeli hale getir */
+@media (max-width: 768px) {.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 6px 0;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+  z-index: 1000;
+  height: 64px;                 /* sabit yükseklik – taşma önler */
+}
+.logout-btn{
+   background: white; 
+   border: none; padding: 0.1px; text-align: center; cursor: pointer; font-size: 0.65rem; border-bottom: 1px solid #f7fafc; }
+   
+/* Her bir sekme */
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10.5px;            /* ← yazı boyutu küçültüldü */
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px 6px;
+  min-width: 58px;
+  line-height: 1.1;
+}
+
+.nav-item .icon {
+  font-size: 1.45rem;           /* ikon biraz küçültüldü */
+  margin-bottom: 2px;
+}
+
+.nav-item .label {
+  font-size: 10.5px;            /* label yazı boyutu */
+  white-space: nowrap;          /* üst üste binmesin */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.nav-item.active {
+  color: #667eea;
+  font-weight: 600;
+}
+}
+@media (max-width:768px){
+  .feature-boxes{
+    gap: 8px;
+  }
+
+  .f-box{
+    flex:1;          /* ekrana yayılır */
+    font-size:14px;
+    padding:10px;
+  }
+  /* Hover efekti */
+  .f-box{
+    transform: translateY(-2px) scale(1.03);
+
+    /* parlama */
+    box-shadow:
+      0 0 12px rgba(185, 224, 226, 0.6),
+      0 0 24px rgba(135, 30, 209, 0.4);
+  }
+}
+
+
+
+/* 1. Ana içerik alanını tam genişliğe zorla + ortalamayı kaldır */
+.main-content {
+  align-items: center !important;     /* center → stretch */
+  justify-content: flex-start !important;
+  padding: 16px 0 16px 16px !important; /* sağ padding'i sıfırla */
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* 2. Content card'ı tam ekran yap */
+.content-card {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 25px 25px 16px 25px !important;     /* kenar boşluklarını minimuma indir */
+  border-radius: 11px !important;         /* opsiyonel: köşeleri kaldırıp tam yayılma hissi ver */
+}
+
+/* 3. Coach grid ve chat column'ı tam genişliğe yay */
+.coach-grid {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 18px !important;
+  flex-direction: row !important;      /* emin olmak için */
+}
+
+.chat-column,
+.chat-main,
+.messages-area {
+  width: 100% !important;
+  max-width: none !important;
+  flex: 1 1 auto !important;
+  padding: 16px 16px 16px 8px !important; /* sağ tarafa biraz boşluk bırak, çok yapışık olmasın */
+}
+
+/* 4. Balonları da biraz daha genişlet (daha doğal dursun) */
+.bubble {
+  max-width: 85% !important;           /* 80% → 85-90% yapabilirsin */
+}
+/* --- CHAT BALONCUĞU LİSTE DÜZELTMESİ (Sohbet Kısmı) --- */
+.bubble ul, 
+.bubble ol {
+    padding-left: 25px !important; /* Numaralar ve maddeler için soldan boşluk */
+    margin-left: 5px !important;   /* Hafifçe içeri it */
+    margin-top: 8px;               /* Üstteki yazıdan biraz ayrıl */
+    margin-bottom: 8px;            /* Alttaki yazıdan ayrıl */
+}
+
+.bubble li {
+    margin-bottom: 5px;            /* Maddeler birbirine yapışmasın */
+    padding-left: 3px;             /* Numara ile yazı arasına minik boşluk */
+}
+
+/* Chat içindeki kalın yazılar ve başlıklar daha net olsun */
+.bubble h3, 
+.bubble h4, 
+.bubble strong {
+    font-weight: 700;
+    margin-top: 10px;
+    display: block;                /* Başlıkları ayrı satıra zorla */
+}
+
+
+
+/* 6. Eğer "Analiz & Tavsiye" kısmını sohbet modunda tamamen kaldırmak istiyorsan */
+.coach-grid.chat-mode .ai-advice-box,
+.coach-grid.chat-mode .advice-column {
+  display: none !important;
+}
+
+.coach-grid.chat-mode .chat-column {
+  width: 100% !important;
+}
+
+/* MOBİLDE TAM EKRAN HİSsi - mor kenar boşluklarını sıfırla */
+@media (max-width: 768px) {
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  }
+
+  .dashboard-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    
+    background: transparent !important;   /* moru wrapper'dan kaldır */
+  }
+
+  .main-content {
+    margin: 0 !important;
+    padding: 12px !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow-y: auto;
+  }
+
+  .content-card {
+    margin: 0 !important;
+    padding: 16px !important;           /* içerde biraz boşluk kalsın ama kenar sıfır */
+    width: 100% !important;
+    min-height: 80vh !important;       /* tam ekran kaplasın */
+    border-radius: 16px !important;        /* köşeleri kaldır, tam yayılma */
+    box-shadow: none !important;        /* gölge de moru artırabilir */
+    background: white !important;       /* veya rgba(255,255,255,0.95) dene */
+  }
+
+  /* Profil içeriğinin olduğu kutu (eğer özel class'ı varsa) */
+  .profile-container,                /* ← kendi class adını buraya yaz, yoksa aşağıdaki genel kural yeter */
+  .content-card > div:first-child {  /* profil bilgileri bölümü */
+    margin: 0 !important;
+    padding: 16px !important;
+    width: 100% !important;
+  }
+
+  /* Bottom navigation'ı da kenara yasla */
+  .bottom-nav {
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    padding: 8px  !important;
+    width: 100vw !important;
+  }
+
+  /* Eğer hala mor görüyorsan bu son çare */
+  html, body, #root, .dashboard-wrapper, .main-content {
+    background: rgb(116, 66, 169) !important;      /* geçici test için beyaz yap, mor kayboluyor mu bak */
+  }
+}
+
+/* NOTES (SAĞDAKİ BÜYÜK KARTLAR) */
+@media (max-width: 768px) {
+  /* Son 3 not - 3 sütun yan yana */
+  .notes-grid.recent-notes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   /* 3 sütun */
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  /* Eski notlar grid'i - aynı şekilde 3 sütun */
+  .notes-grid.older-notes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  /* Kartlar mobilde küçülsün, sığsın */
+  .note-card {
+    padding: 12px;
+    min-height: 140px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  }
+
+  .note-title {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .note-content {
+    font-size: 0.85rem;
+    height: 70px;
+    line-height: 1.3;
+  }
+
+  .delete-note-btn {
+    bottom: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+  }
+
+  /* Eski notları göster butonu */
+  .open-notes-modal-btn {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .open-notes-modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+  }
+
+  .open-notes-modal-btn-container {
+    margin-top: 20px;
+  }
+}
