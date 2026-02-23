@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (pool, authMiddleware) => {
-  // Profil getirme
+
   router.get("/:user_id", async (req, res) => {
     try {
       const result = await pool.query(
@@ -19,7 +19,6 @@ module.exports = (pool, authMiddleware) => {
     }
   });
 
-  // Profil kaydetme/güncelleme
   router.post("/", authMiddleware, async (req, res) => {
     try {
       const userId = req.userId;

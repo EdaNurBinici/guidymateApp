@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 module.exports = (pool) => {
-  // Kayıt olma
+
   router.post("/register", async (req, res) => {
     try {
       const { name, email, password } = req.body;
@@ -24,7 +24,6 @@ module.exports = (pool) => {
     }
   });
 
-  // Giriş yapma
   router.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body;

@@ -19,7 +19,7 @@ async function saveMsg(pool, { userId, sessionId, role, content }) {
 }
 
 module.exports = (pool, authMiddleware, groq) => {
-  // Yeni sohbet başlatma
+
   router.post("/start", authMiddleware, async (req, res) => {
     try {
       const userId = req.userId;
@@ -59,7 +59,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Sohbete cevap gönderme
   router.post("/reply", authMiddleware, async (req, res) => {
     try {
       const userId = req.userId;
@@ -93,7 +92,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Sohbet geçmişini getirme
   router.get("/history/:sessionId", authMiddleware, async (req, res) => {
     try {
       const result = await pool.query(
@@ -107,7 +105,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Tüm sohbetleri listeleme
   router.get("/sessions", authMiddleware, async (req, res) => {
     try {
       const result = await pool.query(
@@ -121,7 +118,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Sohbet silme
   router.delete("/sessions/:id", authMiddleware, async (req, res) => {
     try {
       await pool.query("DELETE FROM coach_messages WHERE session_id = $1", [req.params.id]);
@@ -136,7 +132,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Sohbet adını güncelleme
   router.put("/sessions/:id", authMiddleware, async (req, res) => {
     try {
       const { title } = req.body;

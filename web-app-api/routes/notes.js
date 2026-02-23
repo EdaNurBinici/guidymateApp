@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (pool, authMiddleware) => {
-  // Tüm notları getirme
+
   router.get("/", authMiddleware, async (req, res) => {
     try {
       const result = await pool.query(
@@ -16,7 +16,6 @@ module.exports = (pool, authMiddleware) => {
     }
   });
 
-  // Yeni not ekleme
   router.post("/", authMiddleware, async (req, res) => {
     try {
       await pool.query("INSERT INTO notes (user_id, title, content) VALUES ($1, $2, $3)", [
@@ -35,7 +34,6 @@ module.exports = (pool, authMiddleware) => {
     }
   });
 
-  // Not silme
   router.delete("/:id", authMiddleware, async (req, res) => {
     try {
       await pool.query("DELETE FROM notes WHERE id = $1 AND user_id = $2", [

@@ -2,13 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (pool, authMiddleware, groq) => {
-  // AI tavsiyesi alma
+
   router.post("/", authMiddleware, async (req, res) => {
     try {
       const userProfile = req.body;
       const userId = req.userId;
 
-      // Geçmiş tavsiyeleri al
       const past = await pool.query(
         "SELECT advice FROM ai_advices WHERE user_id = $1 ORDER BY created_at DESC LIMIT 3",
         [userId]
@@ -35,7 +34,6 @@ module.exports = (pool, authMiddleware, groq) => {
 
       const adviceText = chat.choices[0]?.message?.content || "Hedefinden vazgeçme!";
 
-      // Tavsiyeyi kaydet
       await pool.query("INSERT INTO ai_advices (user_id, advice) VALUES ($1, $2)", [
         userId,
         adviceText,

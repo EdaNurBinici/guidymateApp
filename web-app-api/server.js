@@ -10,10 +10,8 @@ const jwt = require("jsonwebtoken");
 const Groq = require("groq-sdk");
 const { OAuth2Client } = require('google-auth-library');
 
-// Google OAuth Client
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// Auth Middleware
 let authMiddleware;
 try {
   authMiddleware = require("./middleware/auth");
@@ -53,12 +51,10 @@ app.get("/", (req, res) => {
   }); 
 });
 
-// --- 1. AUTH ---
 app.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    
-    // Validasyon
+
     if (!name || !email || !password) {
       return res.status(400).json({ message: "Tüm alanları doldur!" });
     }
@@ -84,8 +80,7 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    
-    // Validasyon
+
     if (!email || !password) {
       return res.status(400).json({ message: "Email ve şifre gerekli!" });
     }
@@ -108,12 +103,10 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Google OAuth Login
 app.post("/auth/google", async (req, res) => {
   try {
     const { credential } = req.body;
-    
-    // Google token'ı doğrula
+
     const ticket = await googleClient.verifyIdToken({
       idToken: credential,
       audience: process.env.GOOGLE_CLIENT_ID,
@@ -121,20 +114,18 @@ app.post("/auth/google", async (req, res) => {
     
     const payload = ticket.getPayload();
     const { email, name, sub: googleId } = payload;
-    
-    // Kullanıcı var mı kontrol et
+
     let user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
     
     if (user.rows.length === 0) {
-      // Yeni kullanıcı oluştur
+
       const result = await pool.query(
         "INSERT INTO users (name, email, password, google_id) VALUES ($1, $2, $3, $4) RETURNING id",
         [name, email, 'google_oauth', googleId]
       );
       user = await pool.query("SELECT * FROM users WHERE id = $1", [result.rows[0].id]);
     }
-    
-    // JWT token oluştur
+
     const token = jwt.sign({ userId: user.rows[0].id }, process.env.JWT_SECRET, { expiresIn: "7d" });
     res.json({ message: "Google ile giriş başarılı!", token, userId: user.rows[0].id });
     
@@ -144,7 +135,6 @@ app.post("/auth/google", async (req, res) => {
   }
 });
 
-// --- 2. PROFİL ---
 app.get("/profile/:user_id", async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM users_profiles WHERE user_id = $1", [req.params.user_id]);
@@ -173,7 +163,6 @@ app.post("/profile", authMiddleware, async (req, res) => {
   } catch (err) { res.status(500).json({ message: "Hata" }); }
 });
 
-// --- 3. AI TAVSİYESİ ---
 app.post("/get-ai-advice", authMiddleware, async (req, res) => {
   console.log("🔵 AI Advice isteği geldi, userId:", req.userId);
   try {
@@ -222,7 +211,6 @@ app.post("/get-ai-advice", authMiddleware, async (req, res) => {
   }
 });
 
-// --- 4. CHAT SİSTEMİ ---
 const SYSTEM_PROMPTS = {
   tr: `
 Sen "KariyerAsistanı" adında kıdemli bir mentörsün.
@@ -351,7 +339,6 @@ app.get("/coach/sessions", authMiddleware, async (req, res) => {
   } catch (err) { res.status(500).json({ message: "Hata" }); }
 });
 
-// --- 5. ROADMAP (HATA KORUMALI VERSİYON) ---
 app.post("/roadmap/generate", authMiddleware, async (req, res) => {
   const userId = req.userId;
   const { language = 'tr' } = req.body; // Dil parametresi
@@ -361,7 +348,6 @@ app.post("/roadmap/generate", authMiddleware, async (req, res) => {
     const profRes = await pool.query("SELECT * FROM users_profiles WHERE user_id = $1", [userId]);
     const p = profRes.rows[0];
 
-    // Eğer profil yoksa hata dön ama JSON formatında dön
     const noProfileMsg = language === 'en' 
       ? "Please save your goal in 'My Profile' tab first!" 
       : "Lütfen önce 'Profilim' sekmesinden hedefini kaydet!";
@@ -379,7 +365,7 @@ app.post("/roadmap/generate", authMiddleware, async (req, res) => {
     let forbiddenWords = "";
 
     if (language === 'en') {
-      // English prompts
+
       if (currentLevel === 1) {
           specificPrompt = "This stage: 'FOUNDATION'. Give tasks about learning topics, choosing resources, and making a plan.";
           forbiddenWords = "NEVER say 'Prepare CV', 'LinkedIn', 'Job application', 'Internship'.";
@@ -397,7 +383,7 @@ app.post("/roadmap/generate", authMiddleware, async (req, res) => {
           forbiddenWords = "NEVER say 'Learn', 'Research'. Say 'Apply', 'Create'.";
       }
     } else {
-      // Turkish prompts
+
       if (currentLevel === 1) {
           specificPrompt = "Bu aşama: 'TEMEL ATMA'. Konuları öğrenmek, kaynak seçmek ve program yapmakla ilgili görevler ver.";
           forbiddenWords = "ASLA 'CV hazırla', 'LinkedIn', 'İş başvurusu', 'Staj' deme.";
@@ -444,20 +430,20 @@ app.post("/roadmap/generate", authMiddleware, async (req, res) => {
     });
 
     let content = chat.choices[0]?.message?.content || "[]";
-    // AI bazen JSON dışında yazı da yazar, onu temizleyelim:
+
     const match = content.match(/\[[\s\S]*?\]/);
     if (match) { content = match[0]; }
     
     let tasks = [];
     try {
         tasks = JSON.parse(content);
-        // Bazen string array yerine obje array dönebilir, düzeltelim:
+
         if (tasks.length > 0 && typeof tasks[0] === 'object') { 
             tasks = tasks.map(t => Object.values(t)[0] || (language === 'en' ? "Task" : "Görev")); 
         }
     } catch (e) {
         console.log("JSON Parse Hatası:", e);
-        // Yedek görevler (AI hata verirse bunlar çıkar)
+
         tasks = language === 'en' 
           ? ["Focus on your goal and study", "Identify your weak points", "Practice", "Test yourself", "Update your plan"]
           : ["Hedefine odaklan ve çalış", "Eksik konularını belirle", "Pratik yap", "Kendini test et", "Planını güncelle"];
@@ -465,7 +451,7 @@ app.post("/roadmap/generate", authMiddleware, async (req, res) => {
 
     await pool.query("DELETE FROM roadmap_items WHERE user_id = $1", [userId]);
     for (const task of tasks) {
-      // Görev boş string olmasın
+
       if(task && typeof task === 'string' && task.trim() !== "") {
           await pool.query("INSERT INTO roadmap_items (user_id, task) VALUES ($1, $2)", [userId, String(task)]);
       }
@@ -479,7 +465,7 @@ app.post("/roadmap/generate", authMiddleware, async (req, res) => {
 
   } catch (err) {
     console.error("Roadmap Server Hatası:", err);
-    // Frontend'in donmaması için mutlaka bir cevap dönüyoruz:
+
     const errorMsg = language === 'en' ? "A server error occurred, please try again." : "Sunucuda bir hata oluştu, lütfen tekrar dene.";
     res.json({ success: false, message: errorMsg });
   }
@@ -536,10 +522,9 @@ app.get("/roadmap/level", authMiddleware, async (req, res) => {
   } catch (err) { res.status(500).json({ level: 1 }); }
 });
 
-// --- NOTLAR ---
 app.get("/notes", authMiddleware, async (req, res) => {
   try {
-    // 🔥 NOTLARI EN YENİDEN ESKİYE SIRALA
+
     const result = await pool.query("SELECT * FROM notes WHERE user_id = $1 ORDER BY id DESC", [req.userId]);
     res.json(result.rows);
   } catch (err) { res.status(500).json({ message: "Hata" }); }

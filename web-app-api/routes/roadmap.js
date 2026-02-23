@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (pool, authMiddleware, groq) => {
-  // Yol haritası oluşturma
+
   router.post("/generate", authMiddleware, async (req, res) => {
     const userId = req.userId;
     let currentLevel = 1;
@@ -32,71 +32,67 @@ module.exports = (pool, authMiddleware, groq) => {
         });
       }
 
-      // ========================================
-      // 🧠 AKILLI HEDEF TESPİTİ
-      // ========================================
-      
-      // Hedef kategorisini belirle
+
+
+
       let goalCategory = "genel";
       let categoryContext = "";
       
       const goalLower = userGoal.toLowerCase();
-      
-      // Sınav/Akademik
+
       if (goalLower.match(/yks|tyt|ayt|kpss|dgs|lgs|ales|ydt|sınav|üniversite|hazırlık|kazanmak|okumak|test|deneme/)) {
         goalCategory = "sınav";
         categoryContext = "Bu bir SINAV HAZIRLIĞI hedefi. Soru çözme, deneme, konu tekrarı gibi akademik görevler ver.";
       }
-      // Programlama/Yazılım
+
       else if (goalLower.match(/yazılım|programlama|kod|developer|frontend|backend|fullstack|react|python|javascript|java|web|mobil|uygulama geliştir|software/)) {
         goalCategory = "yazılım";
         categoryContext = "Bu bir YAZILIM/PROGRAMLAMA hedefi. Kod yazmak, proje geliştirmek, teknoloji öğrenmekle ilgili görevler ver.";
       }
-      // Spor/Fitness
+
       else if (goalLower.match(/spor|fitness|kilo|kas|koşu|antrenman|egzersiz|vücut|sağlık|zayıfla|form|gym|jimnastik/)) {
         goalCategory = "spor";
         categoryContext = "Bu bir SPOR/FİTNESS hedefi. Antrenman, beslenme, fiziksel aktivite ile ilgili görevler ver.";
       }
-      // Dil Öğrenme
+
       else if (goalLower.match(/ingilizce|almanca|fransızca|ispanyolca|dil öğren|yabancı dil|toefl|ielts|kelime|gramer|konuşma/)) {
         goalCategory = "dil";
         categoryContext = "Bu bir DİL ÖĞRENME hedefi. Kelime, gramer, dinleme, konuşma pratiği ile ilgili görevler ver.";
       }
-      // Sanat/Müzik
+
       else if (goalLower.match(/müzik|enstrüman|gitar|piyano|resim|çizim|sanat|fotoğraf|tasarım|grafik|illüstrasyon/)) {
         goalCategory = "sanat";
         categoryContext = "Bu bir SANAT/MÜZİK hedefi. Pratik yapma, eser üretme, teknik geliştirme ile ilgili görevler ver.";
       }
-      // İş/Kariyer (genel)
+
       else if (goalLower.match(/iş|kariyer|terfi|maaş|pozisyon|şirket|girişim|startup|işe gir|cv|özgeçmiş|mülakat/)) {
         goalCategory = "kariyer";
         categoryContext = "Bu bir KARİYER/İŞ hedefi. CV, networking, beceri geliştirme, iş başvurusu ile ilgili görevler ver.";
       }
-      // Matematik
+
       else if (goalLower.match(/matematik|geometri|analiz|integral|türev|limit|sayısal|problem çöz/)) {
         goalCategory = "matematik";
         categoryContext = "Bu bir MATEMATİK hedefi. Problem çözme, konu pekiştirme, formül ezber ile ilgili görevler ver.";
       }
-      // İş Kurma/Girişimcilik
+
       else if (goalLower.match(/girişim|startup|iş kur|şirket kur|ürün geliştir|pazar|müşteri|satış|pazarlama/)) {
         goalCategory = "girişim";
         categoryContext = "Bu bir GİRİŞİMCİLİK hedefi. Ürün geliştirme, pazar araştırması, müşteri bulma ile ilgili görevler ver.";
       }
-      // Okuma/Yazma
+
       else if (goalLower.match(/kitap|okuma|yazar|roman|makale|blog|yazı yaz|edebiyat/)) {
         goalCategory = "okuma-yazma";
         categoryContext = "Bu bir OKUMA/YAZMA hedefi. Kitap okuma, yazı yazma, analiz yapma ile ilgili görevler ver.";
       }
-      
-      // ========================================
-      // 📊 SEVİYE MANTIĞI (Kategoriye Göre)
-      // ========================================
+
+
+
       
       let specificPrompt = "";
       let forbiddenWords = "";
       
       if (currentLevel === 1) {
-        // Seviye 1: Temel Atma
+
         if (goalCategory === "sınav") {
           specificPrompt = "Bu aşama: 'TEMEL ATMA'. Konu listesi çıkar, kaynak seç, çalışma programı yap.";
           forbiddenWords = "ASLA 'CV', 'İş başvurusu', 'Staj', 'Mülakat' deme.";
@@ -120,7 +116,7 @@ module.exports = (pool, authMiddleware, groq) => {
           forbiddenWords = "";
         }
       } else if (currentLevel === 2) {
-        // Seviye 2: Pratik
+
         if (goalCategory === "sınav") {
           specificPrompt = "Bu aşama: 'PRATİK'. Günlük soru çöz, konu tekrarı yap, zayıf konuları güçlendir.";
           forbiddenWords = "ASLA 'CV', 'İş' deme.";
@@ -141,7 +137,7 @@ module.exports = (pool, authMiddleware, groq) => {
           forbiddenWords = "";
         }
       } else if (currentLevel === 3) {
-        // Seviye 3: Zorlanma/Proje
+
         if (goalCategory === "sınav") {
           specificPrompt = "Bu aşama: 'ZORLANMA'. Branş denemeleri çöz, zor sorulara odaklan, hız çalış.";
           forbiddenWords = "";
@@ -165,7 +161,7 @@ module.exports = (pool, authMiddleware, groq) => {
           forbiddenWords = "";
         }
       } else if (currentLevel === 4) {
-        // Seviye 4: Portfolyo/Deneme
+
         if (goalCategory === "sınav") {
           specificPrompt = "Bu aşama: 'SINAV PROVASI'. Genel denemeler çöz, sınav stratejisi geliştir, zaman yönetimi yap.";
           forbiddenWords = "";
@@ -189,7 +185,7 @@ module.exports = (pool, authMiddleware, groq) => {
           forbiddenWords = "";
         }
       } else {
-        // Seviye 5: Final
+
         if (goalCategory === "sınav") {
           specificPrompt = "Bu aşama: 'FİNAL'. Son tekrarlar, motivasyon, sınav günü hazırlığı.";
           forbiddenWords = "";
@@ -295,7 +291,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Yol haritasını getirme
   router.get("/", authMiddleware, async (req, res) => {
     try {
       const result = await pool.query(
@@ -309,7 +304,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Görev durumunu güncelleme
   router.put("/:id", authMiddleware, async (req, res) => {
     try {
       await pool.query(
@@ -323,7 +317,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Seviye atlama
   router.post("/levelup", authMiddleware, async (req, res) => {
     try {
       const userId = req.userId;
@@ -356,7 +349,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Yol haritasını sıfırlama
   router.post("/reset", authMiddleware, async (req, res) => {
     try {
       const userId = req.userId;
@@ -371,7 +363,6 @@ module.exports = (pool, authMiddleware, groq) => {
     }
   });
 
-  // Mevcut seviyeyi getirme
   router.get("/level", authMiddleware, async (req, res) => {
     try {
       const result = await pool.query(

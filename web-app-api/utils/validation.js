@@ -1,6 +1,5 @@
 const Joi = require('joi');
 
-// Validation schemas
 const schemas = {
   register: Joi.object({
     name: Joi.string().min(2).max(50).required().messages({
@@ -55,7 +54,6 @@ const schemas = {
   })
 };
 
-// Validation middleware
 const validate = (schemaName) => {
   return (req, res, next) => {
     const schema = schemas[schemaName];
