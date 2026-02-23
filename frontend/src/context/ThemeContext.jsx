@@ -12,23 +12,21 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    // LocalStorage'dan tema tercihini al
+
     const saved = localStorage.getItem('theme');
     if (saved && ['light', 'dark', 'autumn'].includes(saved)) {
       return saved;
     }
-    // Sistem tercihini kontrol et
+
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   useEffect(() => {
-    // Tema değiştiğinde localStorage'a kaydet
+
     localStorage.setItem('theme', theme);
-    
-    // Body'den tüm tema class'larını kaldır
+
     document.body.classList.remove('dark-mode', 'autumn-mode');
-    
-    // Yeni temayı ekle
+
     if (theme === 'dark') {
       document.body.classList.add('dark-mode');
     } else if (theme === 'autumn') {

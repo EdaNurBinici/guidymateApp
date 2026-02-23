@@ -14,7 +14,6 @@ export function useWindowSize() {
       });
     }
 
-    // İlk yüklemede boyutu ayarla
     handleResize();
 
     window.addEventListener('resize', handleResize);

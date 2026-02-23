@@ -14,14 +14,13 @@ const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const GOOGLE_ENABLED = GOOGLE_CLIENT_ID && GOOGLE_CLIENT_ID !== 'your_google_client_id_here';
 
 function App() {
-  // Dil desteği
+
   const [language, setLanguage] = useState(() => {
     const savedLang = localStorage.getItem('language') || 'tr';
     console.log("🌍 Initial language:", savedLang); // DEBUG
     return savedLang;
   });
-  
-  // Dil değiştiğinde log
+
   useEffect(() => {
     console.log("🌍 Language changed to:", language); // DEBUG
   }, [language]);
@@ -51,7 +50,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState(""); // arama için
   const [roadmap, setRoadmap] = useState([]);
   const [roadmapLoading, setRoadmapLoading] = useState(false);
-  // Arama filtrelemesi – TAM BURAYA
+
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(notesSearchQuery.toLowerCase()) ||
     note.content.toLowerCase().includes(notesSearchQuery.toLowerCase())
@@ -67,7 +66,6 @@ function App() {
 
   const [activeMenuId, setActiveMenuId] = useState(null);
 
-  // Modal state'leri
   const [confirmModal, setConfirmModal] = useState({
     isOpen: false,
     type: 'confirm', // 'confirm' veya 'prompt'
@@ -78,7 +76,6 @@ function App() {
     inputPlaceholder: '',
   });
 
-  // Loading state'leri
   const [loadingStates, setLoadingStates] = useState({
     notes: false,
     addNote: false,
@@ -91,8 +88,7 @@ function App() {
   const [timerActive, setTimerActive] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
   const alarmSound = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
-  
-  // Timer arka plan özelleştirme
+
   const [timerBackground, setTimerBackground] = useState(() => {
     return localStorage.getItem('timerBackground') || 'gradient';
   });
@@ -102,18 +98,15 @@ function App() {
   const [showBgSelector, setShowBgSelector] = useState(false);
   const [showImageSubmenu, setShowImageSubmenu] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  
-  // Timer arka plan değiştiğinde localStorage'a kaydet
+
   useEffect(() => {
     localStorage.setItem('timerBackground', timerBackground);
   }, [timerBackground]);
-  
-  // Özel renk değiştiğinde localStorage'a kaydet
+
   useEffect(() => {
     localStorage.setItem('timerCustomColor', customColor);
   }, [customColor]);
-  
-  // ESC tuşu ile tam ekrandan çık
+
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape' && isFullscreen) {
@@ -154,7 +147,6 @@ function App() {
     study_hours: "",
   });
 
-  // NOT MANTIĞI
   const sortedNotes = [...notes].reverse();
   const recentNotes = sortedNotes.slice(0, 3);
   const olderNotes = sortedNotes.slice(3);
@@ -181,7 +173,6 @@ function App() {
     setTimeout(() => setNotification(null), 3000);
   };
 
-  // TIMER EFFECT
   useEffect(() => {
     let interval = null;
     if (timerActive && timeLeft > 0) {
@@ -202,17 +193,16 @@ function App() {
   }, [timerActive, timeLeft, isBreak, breakTime, focusTime]);
 
   const formatTime = (seconds) => {
-    // Negatif değerleri engelle
+
     const totalSeconds = Math.max(0, seconds);
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
     const s = totalSeconds % 60;
-    
-    // Eğer 1 saat veya daha fazlaysa: "2:05:30" formatı
+
     if (h > 0) {
       return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
     }
-    // 1 saatten azsa: "25:30" formatı
+
     return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   };
 
@@ -231,30 +221,28 @@ function App() {
     if (!timerActive && isBreak) setTimeLeft(val * 60);
   };
 
-  // Sayfa yüklendiğinde token kontrol et
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      // Token varsa kullanıcı giriş yapmış, dashboard'a git
+
       setView("dashboard");
-      // Token'dan userId çıkar (basit yöntem)
+
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
         setUserId(payload.userId);
         checkProfile(payload.userId);
       } catch (error) {
-        // Token bozuksa temizle
+
         logger.error('Token parse error:', error);
         localStorage.removeItem("token");
         setView("landing");
       }
     } else {
-      // Token yoksa landing sayfasında kal
+
       setView("landing");
     }
   }, []);
 
-  // Modal helper fonksiyonları
   const showConfirm = (title, message, onConfirm) => {
     setConfirmModal({
       isOpen: true,
@@ -483,7 +471,7 @@ function App() {
         fetchRoadmap();
       } else if (result.data.roadmap) {
         setRoadmap(result.data.roadmap);
-        // Backend'den gelen mesajı kullan, yoksa translation'ı kullan
+
         showToast(result.data.message || t.planCreated);
       } else if (result.data.message) {
         showToast(result.data.message);
@@ -601,7 +589,7 @@ function App() {
         showToast(t.loginSuccess);
         setMessage("");
       } else {
-        // Kullanıcı dostu hata mesajları
+
         if (data.message === "Email bulunamadı") {
           setMessage("❌ Bu email ile kayıtlı kullanıcı bulunamadı. Önce kayıt ol!");
         } else if (data.message === "Şifre yanlış") {
@@ -628,8 +616,7 @@ function App() {
       setMessage("⚠️ Şifre en az 6 karakter olmalı!");
       return;
     }
-    
-    // Email formatı kontrolü
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(authData.email)) {
       setMessage("⚠️ Geçerli bir email adresi gir!");
@@ -650,7 +637,7 @@ function App() {
         setMessage("✅ Kayıt başarılı! Şimdi giriş yap.");
         setAuthData({ name: "", email: "", password: "" });
       } else {
-        // Kullanıcı dostu hata mesajları
+
         if (data.message === "Bu email kayıtlı!") {
           setMessage("❌ Bu email zaten kullanılıyor. Giriş yap veya başka email kullan.");
         } else {
@@ -713,7 +700,7 @@ function App() {
               {t.noCreditCard}
             </p>
 
-            {/* Özellikler */}
+            {}
             <div className="features-grid">
               <div className="feature-card">
                 <div className="feature-icon">🤖</div>
@@ -752,7 +739,7 @@ function App() {
               </div>
             </div>
 
-            {/* CTA */}
+            {}
             <div style={{ marginTop: "60px", textAlign: "center" }}>
               <h2 style={{ fontSize: "2rem", marginBottom: "20px" }}>{t.nextStepTitle}</h2>
               <button className="start-btn" onClick={() => setView("login")}>
@@ -811,7 +798,7 @@ function App() {
             <button className="primary-btn">{view === "login" ? t.login : t.register}</button>
           </form>
           
-          {/* Google ile Giriş - Sadece Client ID varsa göster */}
+          {}
           {GOOGLE_ENABLED && (
             <div className="google-login-container">
               <div style={{ width: "100%", maxWidth: "400px" }}>
@@ -835,7 +822,7 @@ function App() {
             </div>
           )}
           
-          {/* Hata/Başarı Mesajı */}
+          {}
           {message && (
             <div 
               className={
@@ -866,7 +853,7 @@ function App() {
         </>
       )}
       
-      {/* Confirm/Prompt Modal */}
+      {}
       <ConfirmModal
         isOpen={confirmModal.isOpen}
         onClose={closeModal}
@@ -900,7 +887,7 @@ function App() {
         </div>
       )}
 
-      {/* DESKTOP Sidebar */}
+      {}
       <aside className="sidebar-panel" style={{ display: windowWidth >= 768 ? "flex" : "none" }}>
         <div className="sidebar-title">{t.appName}</div>
         <div className="sidebar-menu">
@@ -1123,7 +1110,7 @@ function App() {
     <h2>{t.aiCoachTitle2}</h2>
     <div className="coach-grid">
       <div className="advice-column">
-        {/* Büyük ekran: iki buton yan yana */}
+        {}
         <div className="ai-mode-buttons desktop-buttons">
           <button
             onClick={() => setAiMode("advice")}
@@ -1139,7 +1126,7 @@ function App() {
           </button>
         </div>
 
-        {/* Mobil: tek buton + toggle */}
+        {}
         <div className="ai-mode-buttons mobile-buttons">
           <div className="mobile-toggle">
             <button
@@ -1157,7 +1144,7 @@ function App() {
           </div>
         </div>
 
-        {/* İçerik – büyük ekranda aiMode, mobilde mobileAiMode'a göre göster */}
+        {}
         {(windowWidth > 768 ? aiMode : mobileAiMode) === "advice" && (
           <>
             <button onClick={askAI} className="primary-btn action-btn">
@@ -1179,8 +1166,8 @@ function App() {
 
         {(windowWidth > 768 ? aiMode : mobileAiMode) === "chat" && (
           <div className="chat-column">
-            {/* sohbet sidebar + mesaj alanı – mevcut kodun aynı kalıyor */}
-            {/* MOBİL HAMBURGER BUTONU */}
+            {}
+            {}
 <button
   className="mobile-chat-hamburger"
   onClick={() => setIsChatSidebarOpen(!isChatSidebarOpen)}
@@ -1188,9 +1175,9 @@ function App() {
   {isChatSidebarOpen ? "✕" : "☰"}
 </button>
 
-{/* Sohbet Sidebar – mobil'de slide-in */}
+{}
 <div className={`chat-sidebar ${isChatSidebarOpen ? "open" : ""}`}>
-  {/* Arama kutusu */}
+  {}
   <div className="sidebar-search">
     <input
       type="text"
@@ -1200,7 +1187,7 @@ function App() {
     />
   </div>
 
-  {/* Yeni Sohbet butonu */}
+  {}
   <button
     onClick={() => {
       startNewChat();
@@ -1211,7 +1198,7 @@ function App() {
     {t.newChat}
   </button>
 
-  {/* Filtreli sohbet listesi */}
+  {}
   {sessions
     .filter((s) =>
       (s.title || t.chatTitle)
@@ -1418,7 +1405,7 @@ function App() {
   <>
     <h2>{t.notesTitle2}</h2>
 
-    {/* Yeni not oluşturma kutusu */}
+    {}
     <div className="create-note-box">
       <input
         placeholder={`📌 ${t.noteTitle}`}
@@ -1441,7 +1428,7 @@ function App() {
       </button>
     </div>
 
-    {/* Notları Göster Butonu */}
+    {}
     <button
       className="open-notes-modal-btn"
       onClick={() => setShowNotesModal(true)}
@@ -1449,7 +1436,7 @@ function App() {
       {language === 'en' ? `View Notes (${notes.length} notes)` : `Notları Görüntüle (${notes.length} adet)`}
     </button>
 
-    {/* MODAL - Not Listesi */}
+    {}
     {showNotesModal && (
       <div className="modal-overlay" onClick={() => setShowNotesModal(false)}>
         <div className="modal-content notes-modal" onClick={(e) => e.stopPropagation()}>
@@ -1460,7 +1447,7 @@ function App() {
             </button>
           </div>
 
-          {/* Arama Alanı */}
+          {}
           <div className="modal-search">
             <input
               type="text"
@@ -1471,7 +1458,7 @@ function App() {
             />
           </div>
 
-          {/* Scroll'lu not listesi */}
+          {}
           <div className="notes-modal-list">
             {filteredNotes.length === 0 ? (
               <p className="no-notes">{language === 'en' ? 'No notes found 😔' : 'Aramanıza uygun not bulunamadı 😔'}</p>
@@ -1520,7 +1507,7 @@ function App() {
                 transition: "background 0.5s ease"
               }}
             >
-              {/* Sağ Üst Butonlar */}
+              {}
               <div style={{
                 position: "absolute",
                 top: "20px",
@@ -1530,7 +1517,7 @@ function App() {
                 alignItems: "center",
                 zIndex: 10
               }}>
-                {/* Theme Toggle */}
+                {}
                 <div style={{
                   background: "rgba(255, 255, 255, 0.2)",
                   borderRadius: "50%",
@@ -1540,7 +1527,7 @@ function App() {
                   <ThemeToggle />
                 </div>
                 
-                {/* Arka Plan Seçici Butonu */}
+                {}
                 <button
                   onClick={() => setShowBgSelector(!showBgSelector)}
                   style={{
@@ -1561,7 +1548,7 @@ function App() {
                   🎨
                 </button>
                 
-                {/* Tam Ekran Butonu */}
+                {}
                 <button
                   onClick={() => setIsFullscreen(!isFullscreen)}
                   style={{
@@ -1584,10 +1571,10 @@ function App() {
                 </button>
               </div>
 
-              {/* Arka Plan Seçici Panel */}
+              {}
               {showBgSelector && (
                 <>
-                  {/* Overlay - dışarı tıklayınca kapat */}
+                  {}
                   <div
                     onClick={() => setShowBgSelector(false)}
                     style={{
@@ -1623,7 +1610,7 @@ function App() {
                   </h3>
                   
                   <div style={{ display: "grid", gap: "10px" }}>
-                    {/* Gradient Seçenekleri */}
+                    {}
                     <h4 style={{ margin: "10px 0 8px 0", color: "#4a5568", fontSize: "0.9rem", fontWeight: "600" }}>
                       {t.gradient}
                     </h4>
@@ -1655,7 +1642,7 @@ function App() {
                       </button>
                     ))}
 
-                    {/* Görseller - Toggle Butonu */}
+                    {}
                     <button
                       onClick={() => setShowImageSubmenu(!showImageSubmenu)}
                       style={{
@@ -1678,7 +1665,7 @@ function App() {
                       <span>{showImageSubmenu ? "▼" : "▶"}</span>
                     </button>
                     
-                    {/* Görsel Seçenekleri - Sadece açıksa göster */}
+                    {}
                     {showImageSubmenu && (
                       <div style={{ display: "grid", gap: "10px", marginTop: "5px" }}>
                         {imageOptions.map((img) => (
@@ -1712,7 +1699,7 @@ function App() {
                       </div>
                     )}
 
-                    {/* Özel Renk Seçici */}
+                    {}
                     <h4 style={{ margin: "15px 0 8px 0", color: "#4a5568", fontSize: "0.9rem", fontWeight: "600" }}>
                       {t.customColor}
                     </h4>
@@ -1801,7 +1788,7 @@ function App() {
         </div>
       </main>
 
-      {/* MOBİL BOTTOM NAV */}
+      {}
       <nav className="bottom-nav">
         {[
           { id: "profile", icon: "👤", label: language === 'en' ? 'Profile' : 'Profil' },
@@ -1826,7 +1813,7 @@ function App() {
 }
 
 export default function AppWithGoogleAuth() {
-  // Eğer Google Client ID varsa OAuth Provider ile wrap et
+
   if (GOOGLE_ENABLED) {
     return (
       <GoogleOAuthProvider 
@@ -1838,7 +1825,6 @@ export default function AppWithGoogleAuth() {
       </GoogleOAuthProvider>
     );
   }
-  
-  // Yoksa direkt App'i döndür
+
   return <App />;
 }

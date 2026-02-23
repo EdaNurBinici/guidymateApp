@@ -27,12 +27,12 @@
   transform: scale(0.95);
 }
 
-/* Dark mode'da buton stili */
+
 body.dark-mode .theme-toggle {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* Mobil için */
+
 @media (max-width: 768px) {
   .theme-toggle {
     top: 10px;

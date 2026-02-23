@@ -1,20 +1,7 @@
 import { useEffect } from 'react';
 import './ConfirmModal.css';
 
-/**
- * Modern confirm/prompt modal component
- * @param {boolean} isOpen - Modal açık mı?
- * @param {function} onClose - Modal kapatma fonksiyonu
- * @param {function} onConfirm - Onay butonu callback
- * @param {string} title - Modal başlığı
- * @param {string} message - Modal mesajı
- * @param {string} confirmText - Onay butonu metni (default: "Evet")
- * @param {string} cancelText - İptal butonu metni (default: "Hayır")
- * @param {string} type - Modal tipi: 'confirm' veya 'prompt'
- * @param {string} inputValue - Prompt için input değeri
- * @param {function} onInputChange - Prompt input değişikliği
- * @param {string} inputPlaceholder - Prompt input placeholder
- */
+
 function ConfirmModal({ 
   isOpen, 
   onClose, 
@@ -28,7 +15,7 @@ function ConfirmModal({
   onInputChange = () => {},
   inputPlaceholder = "Yeni değer..."
 }) {
-  // ESC tuşu ile kapat
+
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -38,7 +25,7 @@ function ConfirmModal({
     
     if (isOpen) {
       window.addEventListener('keydown', handleEscape);
-      // Body scroll'u engelle
+
       document.body.style.overflow = 'hidden';
     }
     

@@ -101,7 +101,7 @@ body.dark-mode .language-option {
   text-align: left;
 }
 
-/* Mobil için */
+
 @media (max-width: 768px) {
   .language-toggle {
     top: 10px;

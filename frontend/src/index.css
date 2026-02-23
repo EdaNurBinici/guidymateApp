@@ -1,6 +1,6 @@
-/* index.css - Premium UI + Mobil Uyum */
 
-/* Genel */
+
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -17,7 +17,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Container & Dashboard */
+
 .dashboard-wrapper {
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ body {
   min-height: calc(100vh - 140px);
 }
 
-/* Bottom Navigation (Mobil) */
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -76,7 +76,7 @@ body {
   margin-bottom: 2px;
 }
 
-/* Desktop Sidebar (büyük ekranlarda) */
+
 .sidebar-panel {
   width: 260px;
   background: white;
@@ -107,7 +107,7 @@ body {
   }
 }
 
-/* Butonlar */
+
 .primary-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -131,7 +131,7 @@ body {
   cursor: not-allowed;
 }
 
-/* Input & Form */
+
 input, textarea, select {
   width: 100%;
   padding: 14px 16px;
@@ -148,7 +148,7 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
 }
 
-/* Notes Grid */
+
 .notes-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -167,7 +167,7 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-/* Coach Grid */
+
 .coach-grid {
   display: flex;
   flex-direction: column;
@@ -186,7 +186,7 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-/* Chat */
+
 .messages-area {
   flex: 1;
   overflow-y: auto;
@@ -218,7 +218,7 @@ input:focus, textarea:focus, select:focus {
   border-bottom-left-radius: 4px;
 }
 
-/* Timer */
+
 .timer-display {
   font-size: 5rem;
   font-weight: 800;
@@ -233,7 +233,7 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-/* Diğer stiller (toast, modal vs.) aynı kalabilir */
+
 .toast-notification {
   position: fixed;
   top: 16px;
@@ -253,7 +253,7 @@ input:focus, textarea:focus, select:focus {
   to   { transform: translateX(0); opacity: 1; }
 }
 
-/* Modal */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -274,7 +274,7 @@ input:focus, textarea:focus, select:focus {
   max-height: 90vh;
   overflow-y: auto;
 }
-/* Beyaz kartı tam ekran genişliğine zorla */
+
 .dashboard-wrapper,
 .main-content,
 .content-card {
@@ -285,16 +285,16 @@ input:focus, textarea:focus, select:focus {
   padding-right: 0 !important;
 }
 
-/* İçerik kartı iç boşluklarını azalt + tam yayıl */
+
 .content-card {
-  padding: 12px 8px !important;     /* iç boşlukları küçült */
-  border-radius: 0 !important;      /* kenar boşluğu olmasın */
+  padding: 12px 8px !important;     
+  border-radius: 0 !important;      
   min-height: 100vh !important;
-  box-shadow: none !important;      /* mor boşluk için gölgeyi kaldırabilirsin */
+  box-shadow: none !important;      
 }
 
-/* Main content – kenar boşluklarını sıfırla */
+
 .main-content {
-  padding: 8px 4px !important;      /* çok az kenar boşluğu */
+  padding: 8px 4px !important;      
   margin: 0 !important;
 }

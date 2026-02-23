@@ -1,14 +1,13 @@
-// Çeviri dosyası - Türkçe ve İngilizce
+
 
 export const translations = {
   tr: {
-    // Landing Page
+
     heroTitle: "Kariyerini Yapay Zeka ile Planla",
     heroSubtitle: "Hedeflerine ulaşmak için kişiselleştirilmiş yol haritası, AI koçluk ve üretkenlik araçlarıyla kariyerini bir üst seviyeye taşı",
     startButton: "Ücretsiz Başla 🚀",
     noCreditCard: "Kredi kartı gerekmez • 2 dakikada kurulum",
-    
-    // Features
+
     aiCoachTitle: "AI Kariyer Koçu",
     aiCoachDesc: "Yapay zeka destekli kişiselleştirilmiş kariyer tavsiyeleri ve interaktif sohbet",
     roadmapTitle: "Akıllı Yol Haritası",
@@ -24,8 +23,7 @@ export const translations = {
     
     nextStepTitle: "Kariyerinde Bir Sonraki Adımı At",
     startNowButton: "Hemen Başla →",
-    
-    // Auth
+
     login: "Giriş Yap",
     register: "Kayıt Ol",
     loginTab: "Giriş",
@@ -35,8 +33,7 @@ export const translations = {
     password: "Şifre",
     orText: "veya",
     backButton: "← Geri",
-    
-    // Validation Messages
+
     fillAllFields: "⚠️ Tüm alanları doldur!",
     passwordMinLength: "⚠️ Şifre en az 6 karakter olmalı!",
     validEmail: "⚠️ Geçerli bir email adresi gir!",
@@ -47,8 +44,7 @@ export const translations = {
     loginSuccess: "Giriş başarılı! 🎉",
     googleLoginSuccess: "Google ile giriş başarılı! 🎉",
     connectionError: "⚠️ Sunucuya bağlanılamıyor. Lütfen daha sonra tekrar dene.",
-    
-    // Sidebar
+
     appName: "KariyerAsistanı",
     profile: "👤 Profilim",
     aiCoach: "🤖 AI Koç",
@@ -56,8 +52,7 @@ export const translations = {
     notes: "📝 Not Defteri",
     focusMode: "⏱️ Focus Modu",
     logout: "Çıkış Yap",
-    
-    // Profile
+
     profileTitle: "👤 Profilim",
     age: "Yaş",
     city: "Şehir",
@@ -75,8 +70,7 @@ export const translations = {
     studyHours: "Günlük Çalışma Saati",
     updateButton: "Güncelle ✅",
     profileSaved: "Profil Kaydedildi! ✅",
-    
-    // AI Coach
+
     aiCoachTitle2: "🤖 AI Kariyer Koçu",
     analysisAdvice: "✨ Analiz & Tavsiye Al",
     chat: "💬 Sohbet Et",
@@ -90,8 +84,7 @@ export const translations = {
     writing: "Yazıyor...",
     typeMessage: "Mesaj yaz...",
     chatTitle: "Sohbet",
-    
-    // Roadmap
+
     examPrep: "🎓 Sınav Hazırlık",
     careerPath: "🚀 Kariyer Yolu",
     level: "Seviye",
@@ -106,8 +99,7 @@ export const translations = {
     setNewGoal: "🔄 Yeni Hedef Belirle",
     resetConfirm: "Tüm ilerleme kaybedilecek. Emin misin?",
     planCreated: "Plan Oluşturuldu! 🚀",
-    
-    // Notes
+
     notesTitle2: "📝 Not Defteri",
     addNote: "Not Ekle ✍️",
     noteTitle: "Başlık",
@@ -122,8 +114,7 @@ export const translations = {
     deleteNoteConfirm: "Bu notu silmek istediğine emin misin?",
     titleRequired: "⚠️ Başlık yazmalısın!",
     closeButton: "Kapat",
-    
-    // Focus Mode
+
     focusTitle: "⏱️ Focus Modu",
     focusTime: "Odaklanma Süresi",
     breakTime: "Mola Süresi",
@@ -139,8 +130,7 @@ export const translations = {
     customColor: "Özel Renk",
     fullscreen: "Tam Ekran",
     exitFullscreen: "Tam Ekrandan Çık",
-    
-    // Background Options
+
     purpleGradient: "Mor Gradient",
     blueGradient: "Mavi Gradient",
     greenGradient: "Yeşil Gradient",
@@ -150,14 +140,12 @@ export const translations = {
     mountain: "⛰️ Dağ",
     library: "📚 Kütüphane",
     space: "🌌 Uzay",
-    
-    // Toasts & Notifications
+
     sessionDeleted: "Sohbet silindi.",
     nameUpdated: "İsim güncellendi.",
     resetDone: "Sıfırlandı 🔄",
     fillProfile: "Önce profili doldur!",
-    
-    // Modal
+
     confirmTitle: "Onayla",
     cancelButton: "Hayır",
     confirmButton: "Evet",
@@ -169,13 +157,12 @@ export const translations = {
   },
   
   en: {
-    // Landing Page
+
     heroTitle: "Plan Your Career with AI",
     heroSubtitle: "Elevate your career with personalized roadmaps, AI coaching, and productivity tools to reach your goals",
     startButton: "Start Free 🚀",
     noCreditCard: "No credit card required • 2-minute setup",
-    
-    // Features
+
     aiCoachTitle: "AI Career Coach",
     aiCoachDesc: "AI-powered personalized career advice and interactive chat",
     roadmapTitle: "Smart Roadmap",
@@ -191,8 +178,7 @@ export const translations = {
     
     nextStepTitle: "Take the Next Step in Your Career",
     startNowButton: "Start Now →",
-    
-    // Auth
+
     login: "Login",
     register: "Sign Up",
     loginTab: "Login",
@@ -202,8 +188,7 @@ export const translations = {
     password: "Password",
     orText: "or",
     backButton: "← Back",
-    
-    // Validation Messages
+
     fillAllFields: "⚠️ Fill all fields!",
     passwordMinLength: "⚠️ Password must be at least 6 characters!",
     validEmail: "⚠️ Enter a valid email address!",
@@ -214,8 +199,7 @@ export const translations = {
     loginSuccess: "Login successful! 🎉",
     googleLoginSuccess: "Google login successful! 🎉",
     connectionError: "⚠️ Cannot connect to server. Please try again later.",
-    
-    // Sidebar
+
     appName: "CareerAssistant",
     profile: "👤 My Profile",
     aiCoach: "🤖 AI Coach",
@@ -223,8 +207,7 @@ export const translations = {
     notes: "📝 Notes",
     focusMode: "⏱️ Focus Mode",
     logout: "Logout",
-    
-    // Profile
+
     profileTitle: "👤 My Profile",
     age: "Age",
     city: "City",
@@ -242,8 +225,7 @@ export const translations = {
     studyHours: "Daily Study Hours",
     updateButton: "Update ✅",
     profileSaved: "Profile Saved! ✅",
-    
-    // AI Coach
+
     aiCoachTitle2: "🤖 AI Career Coach",
     analysisAdvice: "✨ Get Analysis & Advice",
     chat: "💬 Chat",
@@ -257,8 +239,7 @@ export const translations = {
     writing: "Writing...",
     typeMessage: "Type a message...",
     chatTitle: "Chat",
-    
-    // Roadmap
+
     examPrep: "🎓 Exam Preparation",
     careerPath: "🚀 Career Path",
     level: "Level",
@@ -273,8 +254,7 @@ export const translations = {
     setNewGoal: "🔄 Set New Goal",
     resetConfirm: "All progress will be lost. Are you sure?",
     planCreated: "Plan Created! 🚀",
-    
-    // Notes
+
     notesTitle2: "📝 Notes",
     addNote: "Add Note ✍️",
     noteTitle: "Title",
@@ -289,8 +269,7 @@ export const translations = {
     deleteNoteConfirm: "Are you sure you want to delete this note?",
     titleRequired: "⚠️ Title is required!",
     closeButton: "Close",
-    
-    // Focus Mode
+
     focusTitle: "⏱️ Focus Mode",
     focusTime: "Focus Time",
     breakTime: "Break Time",
@@ -306,8 +285,7 @@ export const translations = {
     customColor: "Custom Color",
     fullscreen: "Fullscreen",
     exitFullscreen: "Exit Fullscreen",
-    
-    // Background Options
+
     purpleGradient: "Purple Gradient",
     blueGradient: "Blue Gradient",
     greenGradient: "Green Gradient",
@@ -317,14 +295,12 @@ export const translations = {
     mountain: "⛰️ Mountain",
     library: "📚 Library",
     space: "🌌 Space",
-    
-    // Toasts & Notifications
+
     sessionDeleted: "Chat deleted.",
     nameUpdated: "Name updated.",
     resetDone: "Reset complete 🔄",
     fillProfile: "Fill profile first!",
-    
-    // Modal
+
     confirmTitle: "Confirm",
     cancelButton: "No",
     confirmButton: "Yes",
@@ -336,7 +312,6 @@ export const translations = {
   }
 };
 
-// Dil değiştirme hook'u
 export const useTranslation = (language) => {
   return translations[language] || translations.tr;
 };

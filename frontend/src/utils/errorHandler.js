@@ -1,14 +1,12 @@
-// Error Handler Utility
+
 
 export const handleApiError = (error, customMessage = null) => {
   console.error('API Error:', error);
-  
-  // Network error
+
   if (!error.response) {
     return customMessage || 'Bağlantı hatası! Sunucuya ulaşılamıyor.';
   }
-  
-  // HTTP errors
+
   const status = error.response?.status;
   
   switch (status) {

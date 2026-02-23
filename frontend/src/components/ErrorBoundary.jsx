@@ -1,4 +1,4 @@
-// Error Boundary Component
+
 import { Component } from 'react';
 
 class ErrorBoundary extends Component {

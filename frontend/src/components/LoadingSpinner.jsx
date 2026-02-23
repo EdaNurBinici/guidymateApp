@@ -1,4 +1,4 @@
-// Loading Spinner Component
+
 import './LoadingSpinner.css';
 
 export default function LoadingSpinner({ size = 'medium', text = '' }) {

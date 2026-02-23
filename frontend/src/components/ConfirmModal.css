@@ -1,4 +1,4 @@
-/* Confirm Modal Styles */
+
 .confirm-modal-overlay {
   position: fixed;
   top: 0;
@@ -44,13 +44,13 @@
   }
 }
 
-/* Dark mode */
+
 body.dark-mode .confirm-modal-content {
   background: #2d3748;
   color: #f9fafb;
 }
 
-/* Autumn mode */
+
 body.autumn-mode .confirm-modal-content {
   background: #FAF6F0;
   color: #3d3026;
@@ -167,7 +167,7 @@ body.autumn-mode .cancel-btn:hover {
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
-/* Mobil için */
+
 @media (max-width: 768px) {
   .confirm-modal-content {
     padding: 20px;

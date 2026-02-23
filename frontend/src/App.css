@@ -10,22 +10,22 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Dark Mode */
+
 body.dark-mode {
   background: linear-gradient(180deg, #1c1a60 0%, #000207 100%);
   color: #f9fafb;
 }
 
-/* Autumn Mode (Sonbahar - Açık Krem/Kahve Tonları) */
+
 body.autumn-mode {
   background: linear-gradient(135deg, #F5E6D3 0%, #E8D5C4 100%);
   color: #3d3026;
 }
 
-/* TOAST */
+
 .toast-notification { 
   position: fixed; 
-  top: 80px; /* Tema ve dil butonlarının altına taşındı */
+  top: 80px; 
   right: 20px; 
   background: #48bb78; 
   color: white; 
@@ -42,44 +42,44 @@ body.autumn-mode {
   to { transform: translateX(0); opacity: 1; } 
 }
 
-/* MODAL */
+
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(5px); }
 .modal-content { background: white; width: 90%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); max-height: 80vh; overflow-y: auto; border-top: 10px solid #667eea; }
 .modal-title { margin-top: 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 15px; }
 .modal-body { font-size: 1.1rem; line-height: 1.6; white-space: pre-wrap; }
 .close-modal-btn { background: #e53e3e; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; float: right; margin-top: 20px; }
 
-/* LAYOUT */
+
 .landing-container, .login-wrapper { 
   display: flex; 
   flex-direction: column; 
-  /* justify-content: center;  <-- BUNU SİL veya YORUMA AL */
+  
   align-items: center; 
-  min-height: 100vh;        /* <-- height yerine min-height yap */
-  height: auto;             /* <-- Yükseklik serbest olsun */
-  padding-top: 100px;       /* <-- Üstten boşluk bırak ki yapışmasın */
-  padding-bottom: 50px;     /* <-- Alttan da boşluk bırak */
+  min-height: 100vh;        
+  height: auto;             
+  padding-top: 100px;       
+  padding-bottom: 50px;     
   text-align: center; 
   color: white; 
 }
 
-/* Landing sayfası özel arka planlar */
+
 .landing-container {
   background: linear-gradient(135deg, #98a8f9 0%, #d8bff3 100%);
 }
 
-/* Landing sayfası feature card yazıları */
+
 .feature-card h3,
 .feature-card p {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Dark mode landing */
+
 body.dark-mode .landing-container {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
 
-/* Autumn mode landing */
+
 body.autumn-mode .landing-container {
   background: linear-gradient(135deg, #ffd8b0 0%, #74420d 100%);
 }
@@ -95,14 +95,14 @@ body.autumn-mode .landing-container {
 .nav-btn:hover { background: #f7fafc; color: #553c9a; padding-left: 25px; }
 .nav-btn.active { background: linear-gradient(90deg, #667eea, #764ba2); color: white; padding-left: 25px; }
 
-/* ARŞİV NOTLARI (SOLDA) */
+
 .old-notes-section { margin-top: 40px; padding-top: 20px; border-top: 2px dashed #e2e8f0; flex-grow: 1; overflow-y: auto; }
 .sidebar-note-item { display: flex; justify-content: space-between; padding: 10px; font-size: 0.9rem; cursor: pointer; border-radius: 8px; transition: 0.2s; white-space: nowrap; overflow: hidden; }
 .sidebar-note-item:hover { background: #fff9c4; color: #744210; }
 
 .main-content {
   flex-grow: 1;
-  padding: 16px 8px;              /* eskiden 30px → küçült, kenarlardan az boşluk */
+  padding: 16px 8px;              
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -111,11 +111,11 @@ body.autumn-mode .landing-container {
 }
 .feature-boxes{
   display: flex;
-  gap: 35px;              /* aralık */
-  justify-content: center; /* ortala */
+  gap: 35px;              
+  justify-content: center; 
   flex-wrap: wrap; 
   margin-top:20px;  
-  margin-bottom:20px;      /* mobilde taşarsa alta geçsin */
+  margin-bottom:20px;      
 }
 .f-box{
   padding: 12px 18px;
@@ -129,34 +129,34 @@ body.autumn-mode .landing-container {
   transition: 0.25s;
 }
 
-/* Hover efekti */
+
 .f-box:hover{
   transform: translateY(-2px) scale(1.03);
 
-  /* parlama */
+  
   box-shadow:
     0 0 12px rgba(185, 224, 226, 0.6),
     0 0 24px rgba(135, 30, 209, 0.4);
 }
 
 .content-card {
-  background: rgb(238, 236, 236); /* beyaz arka plan */
-  width: 100%;                    /* ← TAM GENİŞLİK */
-  max-width: 100%;                /* eskiden 1200px sınırlıydı, kaldırdık */
+  background: rgb(238, 236, 236); 
+  width: 100%;                    
+  max-width: 100%;                
   min-height: 85vh;
-  border-radius: 16px;            /* daha yumuşak köşeler */
-  padding: 20px 16px;             /* iç boşluk biraz azaltıldı */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12); /* hafif gölge */
+  border-radius: 16px;            
+  padding: 20px 16px;             
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12); 
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
-/* INPUTS */
+
 .input-group { display: flex; flex-direction: column; gap: 15px; }
 input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
 .primary-btn { width: 100%; padding: 14px; background: linear-gradient(to right, #667eea, #764ba2); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; }
 
-/* COACH GRID */
+
 .ai-advice-box { background: white; padding: 15px; border-radius: 12px; border: 1px solid #cbd5e0; flex-grow: 1; overflow-y: auto; font-size: 0.99rem; line-height: 1.6; }
 .chat-sidebar { width: 280px; background: #f7fafc; border-right: 1px solid #e2e8f0; padding: 15px; overflow-y: auto; }
 .chat-main { flex: 1; display: flex; flex-direction: column; }
@@ -176,9 +176,9 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   margin: 0 !important;
   padding: 16px 16px !important;
   border-top: 1px solid rgba(255,255,255,0.15) !important;
-  background: rgba(0,0,0,0.15) !important; /* hafif koyu, moru keser */
+  background: rgba(0,0,0,0.15) !important; 
   box-sizing: border-box !important;
-  border-radius: 0 !important;           /* köşeleri sıfırla */
+  border-radius: 0 !important;           
 }
 
 .input-zone input {
@@ -215,7 +215,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 .bubble.user { align-self: flex-end; background: #667eea; color: white; border-bottom-right-radius: 2px; }
 .bubble.assistant { align-self: flex-start; background: #edf2f7; color: #333; border-bottom-left-radius: 2px; }
 
-/* 🔥 SOHBET MENÜSÜ & LİSTESİ */
+
 .session-item { 
     display: flex; justify-content: space-between; align-items: center; padding: 10px; 
     cursor: pointer; border-radius: 8px; position: relative; border-bottom: 1px solid #edf2f7; 
@@ -234,7 +234,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 .session-dropdown button.delete-btn { color: #e53e3e; }
 .session-dropdown button.delete-btn:hover { background: #fff5f5; }
 
-/* NOTES (SAĞDAKİ BÜYÜK KARTLAR) */
+
 .create-note-box { background: #f8f9fa; padding: 25px; border-radius: 15px; border: 2px dashed #cbd5e0; margin-bottom: 30px; }
 .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 100%; }
 .note-card { background: #fff9c4; padding: 20px; border-radius: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.05); min-height: 200px; cursor: pointer; transition: 0.3s; position: relative; border-top: 5px solid #ecc94b; }
@@ -248,7 +248,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 .roadmap-item { display: flex; align-items: center; padding: 14px; border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
 .roadmap-item.done { background: #f0fff4; text-decoration: line-through; color: #718096; }
 
-/* Progress Container */
+
 .progress-container {
   background: #f0fff4;
   padding: 15px;
@@ -277,7 +277,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   transition: width 0.5s ease;
 }
 
-/* Congratulations Section */
+
 .congratulations-container {
   text-align: center;
   padding: 40px;
@@ -308,7 +308,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   border: 1px solid red;
 }
 
-/* FOCUS MODE */
+
 .focus-wrapper { 
   display: flex; 
   flex-direction: column; 
@@ -321,7 +321,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   padding: 20px;
 }
 
-/* Tam ekran modu */
+
 .focus-wrapper.fullscreen-mode {
   position: fixed;
   top: 0;
@@ -333,14 +333,14 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   margin: 0;
 }
 
-/* Tam ekran modunda sadece saat görünsün - diğer her şeyi gizle */
+
 .focus-wrapper.fullscreen-mode > div[style*="position: absolute"]:first-child {
-  display: flex !important; /* Buton container'ı göster */
+  display: flex !important; 
 }
 
-/* Tam ekranda sadece tam ekran butonu görünsün, diğerleri gizli */
+
 .focus-wrapper.fullscreen-mode > div[style*="position: absolute"]:first-child > *:not(:last-child) {
-  display: none !important; /* Theme toggle ve arka plan butonunu gizle */
+  display: none !important; 
 }
 
 .focus-wrapper.fullscreen-mode .timer-inputs {
@@ -355,13 +355,13 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   display: none !important;
 }
 
-/* Tam ekranda sadece timer display görünsün - biraz küçült */
+
 .focus-wrapper.fullscreen-mode .timer-display {
-  font-size: 8rem !important; /* 10rem'den 8rem'e düşürdüm */
+  font-size: 8rem !important; 
   margin: 0 !important;
 }
 
-/* Timer içindeki theme toggle */
+
 .focus-wrapper .theme-toggle {
   position: relative;
   top: auto;
@@ -446,12 +446,10 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 }
 
 
-/* =========================
-   ✅ COACH GRID (AI Koç ekranı)
-   ========================= */
 
 
-/* Sol kolon (tavsiye) */
+
+
 .advice-column{
   display: flex;
   flex-direction: column;
@@ -459,7 +457,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   min-width: 0;
 }
 
-/* Sağ kolon (chat) */
+
 .chat-column{
   display: flex;
   width: 100%;
@@ -471,7 +469,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   background: #f7fafc;
 }
 
-/* Chat sol sidebar */
+
 .chat-column .chat-sidebar{
   width: 240px;
   flex-shrink: 0;
@@ -481,7 +479,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   overflow-y: auto;
 }
 
-/* Chat ana */
+
 .chat-column .chat-main{
   flex: 1;
   display: flex;
@@ -489,7 +487,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   min-width: 0;
 }
 
-/* Mesaj alanı */
+
 .chat-column .messages-area{
   flex: 1;
   min-height: 320px;
@@ -500,14 +498,14 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   gap: 12px;
 }
 
-/* Mesaj balonları */
+
 .chat-column .bubble{
   max-width: 70%;
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
 
-/* Input alanı (alttaki yazma yeri) */
+
 .input-zone{
   display: flex;
   gap: 10px;
@@ -527,7 +525,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   min-width: 0;
 }
 
-/* Gönder butonu küçük kalmasın */
+
 .input-zone .primary-btn{
   width: 50px;
   min-width: 50px;
@@ -539,7 +537,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   flex-shrink: 0;
 }
 
-/* Tavsiye kutusu taşmasın */
+
 .ai-advice-box{
   min-height: 220px;
 }
@@ -550,7 +548,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
 
   
-  /* "Yeni Sohbet" butonu – ortala, küçült, taşmasın */
+  
   .chat-sidebar .primary-btn {
     display: block;
     width: 95%;
@@ -566,7 +564,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     box-sizing: border-box;
   }
 
-  /* Sohbet isimleri – sola yaslı, taşma önle */
+  
   .session-item {
     width: 100%;
     padding: 8px 6px;
@@ -587,34 +585,34 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
   .session-menu-btn {
     flex-shrink: 0;
-    width: 24px;                    /* ← eskiden 30px → şimdi 24px (daha dar) */
-    height: 24px;                   /* yükseklik de yuvarlak olsun diye eşitledim */
+    width: 24px;                    
+    height: 24px;                   
     padding: 0;
     font-size: 16px;
     background: transparent;
     border: none;
     color: #718096;
-    display: flex;                  /* ikon ortalansın */
+    display: flex;                  
     align-items: left;
     justify-content: left;
-    border-radius: 50%;             /* tam yuvarlak olsun, daha şık durur */
+    border-radius: 50%;             
     cursor: pointer;
     transition: background 0.2s;
 }
 
-  /* Üç nokta menüsü dropdown – mobilde daha küçük */
+  
   .session-dropdown {
     min-width: 50px;
     font-size: 13px;
   }
 
-  /* Genel temizlik */
+  
   .chat-sidebar button,
   .chat-sidebar span {
     text-align: center;
   }
 
-/* Yeni Sohbet butonu – sola yaslı, tam genişlik */
+
   @media (max-width: 768px) {
     .new-chat-btn {
     width: 100%;
@@ -627,27 +625,27 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   }}
 
 .primary-btn{
-    min-height: 35px;            /* TELEFON telefonda daha kısa */
+    min-height: 35px;            
     max-height: 30px;  
-    width: 70%;                  /* parent'ı tamamen kaplasın (genelde zaten böyle) */
-    max-width: 400px;             /* geniş ekranlarda bile çok yayılmasın */
-    margin: 0 auto;               /* ortalasın – kenarlarda boşluk kalsın */
-    box-sizing: border-box;          /* çok yer kaplamasın */
-    padding: 9px;                /* iç boşluk azalsın */
-    font-size: 14px;            /* yazı daha küçük */
+    width: 70%;                  
+    max-width: 400px;             
+    margin: 0 auto;               
+    box-sizing: border-box;          
+    padding: 9px;                
+    font-size: 14px;            
   }
 @media (max-width: 768px) {
   .ai-advice-box {
-    min-height: 10px;            /* telefonda daha kısa */
+    min-height: 10px;            
     max-height: 350px;  
-    width: 100%;                  /* parent'ı tamamen kaplasın (genelde zaten böyle) */
-    max-width: 1500px;             /* geniş ekranlarda bile çok yayılmasın */
-    margin: 4px ;               /* ortalasın – kenarlarda boşluk kalsın */
-    box-sizing: border-box;          /* çok yer kaplamasın */
-    padding: 12px 16px;                /* iç boşluk azalsın */
-    font-size: 11px;            /* yazı daha küçük */
+    width: 100%;                  
+    max-width: 1500px;             
+    margin: 4px ;               
+    box-sizing: border-box;          
+    padding: 12px 16px;                
+    font-size: 11px;            
   }}
-/* --- AI TAVSİYE KUTUSU LİSTE DÜZELTMESİ --- */
+
 .ai-advice-box ul, 
 .ai-advice-box ol {
     padding-left: 25px;
@@ -655,14 +653,14 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 }
 
 .ai-advice-box li {
-    margin-bottom: 8px; /* Maddeler birbirine yapışmasın diye arayı açar */
-    padding-left: 5px;  /* Yazı ile numara arasına minik boşluk */
+    margin-bottom: 8px; 
+    padding-left: 5px;  
 }
 
 .ai-advice-box h3, 
 .ai-advice-box h4, 
 .ai-advice-box strong {
-    color: #2d3748; /* Başlıkları daha okunaklı koyu renk yap */
+    color: #2d3748; 
     margin-top: 15px;
     display: block;
 }
@@ -671,7 +669,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     padding: 16px 10px;
     border-radius: 16px;
   }
-/* Masaüstü (Normal Ekran) İçin */
+
 .coach-grid {
     display: flex;
     grid-template-columns: 25% 1fr; 
@@ -735,7 +733,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   .session-dropdown button.delete-btn { color: #e53e3e; }
   .session-dropdown button.delete-btn:hover { background: #fff5f5; }
   
-/* Eski notları göster butonu */
+
   .open-notes-modal-btn {
     width: 15%;
     padding: 15px 16px;
@@ -759,7 +757,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     margin-top: 20px;
   }
 
-/* MEDİA MEDİA MEDİA MEDİA */
+
 
 @media (max-width: 1000px) { .coach-grid { flex-direction: column; height: auto; } .advice-column, .chat-column { width: 100%; height: 400px; } .sidebar-panel { width: 200px; } .notes-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) { .sidebar-panel { width: 70px; padding: 15px 5px; align-items: center; } .nav-btn { font-size: 0; justify-content: center; } .nav-btn::first-letter { font-size: 1.5rem; } .old-notes-section { display: none; } .notes-grid { grid-template-columns: 1fr; } .timer-display { font-size: 4rem; } }
@@ -782,7 +780,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 .session-dropdown button.delete-btn { color: #e53e3e; }
 .session-dropdown button.delete-btn:hover { background: #fff5f5; }
 
-/* NOTES (SAĞDAKİ BÜYÜK KARTLAR) */
+
 .create-note-box { background: #f8f9fa; padding: 8px; border-radius: 15px; border: 2px dashed #cbd5e0; margin-bottom: 30px; }
 .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 100%; }
 .note-card { background: #fff9c4; padding: 20px; border-radius: 12px; box-shadow: 0 5px 10px rgba(0,0,0,0.05); min-height: 20px; cursor: pointer; transition: 0.3s; position: relative; border-top: 4px solid #ecc94b; }
@@ -813,11 +811,11 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 .roadmap-item { display: flex; align-items: center; padding: 15px; border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
 .roadmap-item.done { background: #f0fff4; text-decoration: line-through; color: #718096; }
 @media (max-width: 768px) {
-  .roadmap-item { display: flex; align-items: center; padding: 10px; font-size: 12px;              /* ← genel yazı boyutu (görev metni) */
+  .roadmap-item { display: flex; align-items: center; padding: 10px; font-size: 12px;              
     line-height: 1.2;border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
   .roadmap-item.done { background: #f0fff4; text-decoration: line-through; color: #718096; }
 
-/* FOCUS MODE */
+
 .focus-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; transition: background 0.5s; }
 .timer-display { font-size: 4rem; font-weight: 800; color: #2d3748; font-variant-numeric: tabular-nums; margin: 20px 0; text-shadow: 2px 2px 0px #e2e8f0; }
 .timer-inputs { display: flex; gap: 20px; margin-bottom: 30px; background: #f7fafc; padding: 14px; border-radius: 15px; border: 1px solid #e2e8f0; }
@@ -831,15 +829,13 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 .btn-reset { background: white; border: 2px solid #eff1f4; color: #4a5568; }
   }
 
-/* =========================
-   ✅ COACH GRID (AI Koç ekranı)
-   ========================= */
+
 .coach-grid {
-    grid-template-columns: 1fr;               /* tek sütun */
-    grid-template-rows: auto fr;             /* üstte tavsiye, altta chat */
+    grid-template-columns: 1fr;               
+    grid-template-rows: auto fr;             
     gap: 16px;
     min-height: 90vh; 
-                            /* ekranın çoğunu kaplasın */
+                            
   }
 
 .advice-column {
@@ -850,12 +846,12 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   }
 
   .chat-column {
-    height: 60vh;                             /* telefon ekranının %60'ı chat olsun */
-    min-height: 420px;                        /* çok küçük olmasın */
+    height: 60vh;                             
+    min-height: 420px;                        
   }
 
   .chat-sidebar {
-    width: 140px ;              /* ← SIDEBAR GENİŞLİĞİ DARALDI */
+    width: 140px ;              
     max-width: 140px ;
     padding: 12px 8px ;
     background: #f8fafc;
@@ -864,10 +860,10 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;              /* içeriği sola yasla */
+    align-items: flex-start;              
   }
 
-/* Chat sol sidebar */
+
 .chat-column .chat-sidebar{
   width: 240px;
   flex-shrink: 0;
@@ -877,7 +873,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   overflow-y: auto;
 }
 
-/* Chat ana */
+
 .chat-column .chat-main{
   flex: 1;
   display: flex;
@@ -885,7 +881,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   min-width: 0;
 }
 
-/* Mesaj alanı */
+
 .chat-column .messages-area{
   flex: 1;
   min-height: 320px;
@@ -896,14 +892,14 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   gap: 12px;
 }
 
-/* Mesaj balonları */
+
 .chat-column .bubble{
   max-width: 70%;
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
 
-/* Input alanı (alttaki yazma yeri) */
+
 .input-zone{
   display: flex;
   gap: 10px;
@@ -923,7 +919,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   min-width: 0;
 }
 
-/* Gönder butonu küçük kalmasın */
+
 .input-zone .primary-btn{
   width: 50px;
   min-width: 50px;
@@ -935,7 +931,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   flex-shrink: 0;
 }
 
-/* Tavsiye kutusu taşmasın */
+
 .ai-advice-box{
   min-height: 220px;
 }
@@ -948,7 +944,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   }
 
   .nav-item {
-    font-size: 10px;            /* telefonda daha küçük yazı */
+    font-size: 10px;            
     min-width: 52px;
     padding: 3px 5px;
   }
@@ -963,12 +959,12 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   }
 }
   .chat-column {
-    height: 60vh;                             /* telefon ekranının %60'ı chat olsun */
-    min-height: 400px;                        /* çok küçük olmasın */
+    height: 60vh;                             
+    min-height: 400px;                        
   }
 
   .chat-sidebar {
-    width: 80px ;              /* ← SIDEBAR GENİŞLİĞİ DARALDI */
+    width: 80px ;              
     max-width: 140px ;
     padding: 12px 8px ;
     background: #f8fafc;
@@ -977,10 +973,10 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;              /* içeriği sola yasla */
+    align-items: flex-start;              
   }
 
-/* Chat sol sidebar */
+
   .chat-column .chat-sidebar{
     width: 240px;
     flex-shrink: 0;
@@ -990,7 +986,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     overflow-y: auto;
 }
 
-/* Çok küçük ekranlar (320-400px genişlik) */
+
 @media (max-width: 480px) {
   .nav-item {
     font-size: 9.5px;
@@ -1028,7 +1024,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-/* Mobil: toggle butonları üst üste, yan yana değil */
+
 @media (max-width: 768px) {
   .ai-mode-buttons {
     flex-direction: column;
@@ -1042,18 +1038,18 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     font-size: 9px;
   }
 
-  /* Büyük ekran butonlarını mobilde gizle */
+  
   .desktop-buttons {
     display: none;
   }
 
-  /* Mobil toggle'ı göster */
+  
   .mobile-buttons {
     display: flex;
   }
 }
 
-/* Büyük ekran: desktop butonlarını göster, mobil toggle'ı gizle */
+
 @media (min-width: 769px) {
   .desktop-buttons {
     display: flex;
@@ -1064,7 +1060,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   }
 }
 
-/* MOBİLDE SOHBET MENÜSÜ – ChatGPT tarzı slide-in */
+
 @media (max-width: 768px) {
   .coach-grid {
     position: relative;
@@ -1072,7 +1068,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     min-height: 450px;
   }
 
-  /* Sidebar – soldan kayarak girer */
+  
   .chat-sidebar {
     position: fixed;
     top: 0;
@@ -1092,7 +1088,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     left: 0;
   }
 
-  /* Hamburger menü butonu */
+  
   .mobile-chat-hamburger {
     position: absolute;
     top: 10px;
@@ -1118,7 +1114,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     left: 260px;
   }
 
-  /* Chat ana alan */
+  
   .chat-column {
     height: 100%;
   }
@@ -1136,7 +1132,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     overflow-y: auto;
   }
 
-  /* Input zone - tam genişlik */
+  
   .input-zone,
   .chat-column .input-zone,
   .chat-main .input-zone {
@@ -1184,14 +1180,14 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     display: none !important;
   }
   
-  /* Ekstra temizlik: sidebar zaten açık olduğu için hamburger'a gerek yok */
+  
   .chat-sidebar {
-    left: 0 !important;          /* her zaman görünür */
+    left: 0 !important;          
     position: relative !important;
     box-shadow: none !important;
   }
 }
-/* Bilgisayar ekranında sidebar her zaman görünür (eski hali bozulmasın) */
+
 @media (min-width: 769px) {
   .mobile-hamburger,
   .mobile-toggle-buttons {
@@ -1207,14 +1203,14 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   
 
 
-/* Menü açıkken buton biraz sağa kaymasın, sabit kalsın */
+
   .chat-sidebar.open + .mobile-chat-hamburger {
-    left: 32px !important; /* sabit kalır */
+    left: 32px !important; 
 }
 
-/* Sidebar açıkken butonun arka planı değişsin (güzel gözüksün) */
+
   .chat-sidebar.open ~ .mobile-chat-hamburger {
-    background: #e53e3e; /* kırmızı tonu – kapat butonu gibi olsun */
+    background: #e53e3e; 
 }}
 @media (min-width: 769px) {
   .sidebar-search{
@@ -1253,7 +1249,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   .session-dropdown button.delete-btn { color: #e53e3e; }
   .session-dropdown button.delete-btn:hover { background: #fff5f5; }
 }
-/* Bottom Navigation - Yazıları küçült + daha dengeli hale getir */
+
 @media (max-width: 768px) {.bottom-nav {
   position: fixed;
   bottom: 0;
@@ -1267,18 +1263,18 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   padding: 6px 0;
   box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
   z-index: 1000;
-  height: 64px;                 /* sabit yükseklik – taşma önler */
+  height: 64px;                 
 }
 .logout-btn{
    background: white; 
    border: none; padding: 0.1px; text-align: center; cursor: pointer; font-size: 0.65rem; border-bottom: 1px solid #f7fafc; }
    
-/* Her bir sekme */
+
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 10.5px;            /* ← yazı boyutu küçültüldü */
+  font-size: 10.5px;            
   color: #64748b;
   cursor: pointer;
   padding: 4px 6px;
@@ -1287,13 +1283,13 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 }
 
 .nav-item .icon {
-  font-size: 1.45rem;           /* ikon biraz küçültüldü */
+  font-size: 1.45rem;           
   margin-bottom: 2px;
 }
 
 .nav-item .label {
-  font-size: 10.5px;            /* label yazı boyutu */
-  white-space: nowrap;          /* üst üste binmesin */
+  font-size: 10.5px;            
+  white-space: nowrap;          
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
@@ -1310,15 +1306,15 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   }
 
   .f-box{
-    flex:1;          /* ekrana yayılır */
+    flex:1;          
     font-size:14px;
     padding:10px;
   }
-  /* Hover efekti */
+  
   .f-box{
     transform: translateY(-2px) scale(1.03);
 
-    /* parlama */
+    
     box-shadow:
       0 0 12px rgba(185, 224, 226, 0.6),
       0 0 24px rgba(135, 30, 209, 0.4);
@@ -1327,31 +1323,31 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
 
 
-/* 1. Ana içerik alanını tam genişliğe zorla + ortalamayı kaldır */
+
 .main-content {
-  align-items: center !important;     /* center → stretch */
+  align-items: center !important;     
   justify-content: flex-start !important;
-  padding: 16px 0 16px 16px !important; /* sağ padding'i sıfırla */
+  padding: 16px 0 16px 16px !important; 
   width: 100% !important;
   max-width: none !important;
 }
 
-/* 2. Content card'ı tam ekran yap */
+
 .content-card {
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
-  padding: 25px 25px 16px 25px !important;     /* kenar boşluklarını minimuma indir */
-  border-radius: 11px !important;         /* opsiyonel: köşeleri kaldırıp tam yayılma hissi ver */
+  padding: 25px 25px 16px 25px !important;     
+  border-radius: 11px !important;         
 }
 
-/* 3. Coach grid ve chat column'ı tam genişliğe yay */
+
 .coach-grid {
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 1px !important;
-  flex-direction: row !important;      /* emin olmak için */
+  flex-direction: row !important;      
 }
 
 .chat-column,
@@ -1361,39 +1357,39 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   max-width: none !important;
   flex: 1 1 auto !important;
   padding: 1px 1px 16px 1px !important;
-   /* sağ tarafa biraz boşluk bırak, çok yapışık olmasın */
+   
 }
 
-/* 4. Balonları da biraz daha genişlet (daha doğal dursun) */
+
 .bubble {
-  max-width: 85% !important;           /* 80% → 85-90% yapabilirsin */
+  max-width: 85% !important;           
 }
-/* --- CHAT BALONCUĞU LİSTE DÜZELTMESİ (Sohbet Kısmı) --- */
+
 .bubble ul, 
 .bubble ol {
-    padding-left: 25px !important; /* Numaralar ve maddeler için soldan boşluk */
-    margin-left: 5px !important;   /* Hafifçe içeri it */
-    margin-top: 8px;               /* Üstteki yazıdan biraz ayrıl */
-    margin-bottom: 8px;            /* Alttaki yazıdan ayrıl */
+    padding-left: 25px !important; 
+    margin-left: 5px !important;   
+    margin-top: 8px;               
+    margin-bottom: 8px;            
 }
 
 .bubble li {
-    margin-bottom: 5px;            /* Maddeler birbirine yapışmasın */
-    padding-left: 3px;             /* Numara ile yazı arasına minik boşluk */
+    margin-bottom: 5px;            
+    padding-left: 3px;             
 }
 
-/* Chat içindeki kalın yazılar ve başlıklar daha net olsun */
+
 .bubble h3, 
 .bubble h4, 
 .bubble strong {
     font-weight: 700;
     margin-top: 10px;
-    display: block;                /* Başlıkları ayrı satıra zorla */
+    display: block;                
 }
 
 
 
-/* 6. Eğer "Analiz & Tavsiye" kısmını sohbet modunda tamamen kaldırmak istiyorsan */
+
 .coach-grid.chat-mode .ai-advice-box,
 .coach-grid.chat-mode .advice-column {
   display: none !important;
@@ -1403,22 +1399,22 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   width: 100% !important;
 }
 
-/* MOBİLDE TAM EKRAN - Temaya göre arka plan */
+
 @media (max-width: 768px) {
 
-  /* LIGHT MODE (default) */
+  
   body {
     margin: 0 !important;
     padding: 0 !important;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   }
 
-  /* DARK MODE */
+  
   body.dark-mode {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
   }
 
-  /* AUTUMN MODE */
+  
   body.autumn-mode {
     background: linear-gradient(135deg, #F5E6D3 0%, #E8D5C4 100%) !important;
   }
@@ -1450,17 +1446,17 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     background: white !important;
   }
 
-  /* Dark mode content card */
+  
   body.dark-mode .content-card {
     background: #1e1e2e !important;
   }
 
-  /* Autumn mode content card */
+  
   body.autumn-mode .content-card {
     background: #FAF6F0 !important;
   }
 
-  /* Profil içeriğinin olduğu kutu */
+  
   .profile-container,
   .content-card > div:first-child {
     margin: 0 !important;
@@ -1468,7 +1464,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     width: 100% !important;
   }
 
-  /* Bottom navigation */
+  
   .bottom-nav {
     left: 0 !important;
     right: 0 !important;
@@ -1477,10 +1473,10 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     width: 100vw !important;
   }
 
-  /* Landing page - Yolculuğa Başla ekranı - Arka plan renklerini koru */
-  /* Mobilde de tema renklerini kullan, transparent yapma */
+  
+  
 
-  /* Login wrapper */
+  
   .login-wrapper {
     background: transparent !important;
   }
@@ -1493,7 +1489,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     background: transparent !important;
   }
 
-  /* Root elementleri temizle */
+  
   html, body, #root {
     margin: 0 !important;
     padding: 0 !important;
@@ -1501,24 +1497,24 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   }
 }
 
-/* NOTES (SAĞDAKİ BÜYÜK KARTLAR) */
+
 @media (max-width: 768px) {
-  /* Son 3 not - 3 sütun yan yana */
+  
   .notes-grid.recent-notes {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);   /* 3 sütun */
+    grid-template-columns: repeat(3, 1fr);   
     gap: 8px;
     margin-bottom: 20px;
   }
 
-  /* Eski notlar grid'i - aynı şekilde 3 sütun */
+  
   .notes-grid.older-notes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
   }
 
-  /* Kartlar mobilde küçülsün, sığsın */
+  
   .note-card {
     padding: 12px 16px;
     min-height: 140px;
@@ -1545,7 +1541,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
     font-size: 0.9rem;
   }
 
-  /* Eski notları göster butonu */
+  
   .open-notes-modal-btn {
     width: 100%;
     padding: 12px 16px;
@@ -1571,11 +1567,9 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 }
 
 
-/* ========================================
-   🌙 DARK MODE
-   ======================================== */
 
-/* Dark mode için tüm kartlar */
+
+
 body.dark-mode .content-card,
 body.dark-mode .modal-content,
 body.dark-mode .login-container,
@@ -1584,7 +1578,7 @@ body.dark-mode .sidebar-panel {
   color: #f9fafb;
 }
 
-/* Dark mode input'lar */
+
 body.dark-mode input,
 body.dark-mode select,
 body.dark-mode textarea {
@@ -1597,12 +1591,12 @@ body.dark-mode input::placeholder {
   color: #9ca3af;
 }
 
-/* Dark mode butonlar */
+
 body.dark-mode .primary-btn {
   background: linear-gradient(to right, #667eea, #764ba2);
 }
 
-/* Dark mode notlar */
+
 body.dark-mode .note-card {
   background: #291b5b;
   border-top-color: #667eea;
@@ -1633,7 +1627,7 @@ body.dark-mode .create-note-box {
   border-color: #2d3448;
 }
 
-/* Dark mode chat */
+
 body.dark-mode .bubble.user {
   background: #667eea;
 }
@@ -1659,7 +1653,7 @@ body.dark-mode .input-zone {
   border-top-color: #2d3748;
 }
 
-/* Dark mode session items */
+
 body.dark-mode .session-item {
   border-bottom-color: #2d3748;
 }
@@ -1696,7 +1690,7 @@ body.dark-mode .session-dropdown button:hover {
   color: #a78bfa;
 }
 
-/* Dark mode roadmap */
+
 body.dark-mode .roadmap-item {
   background: #1a1a2e;
   border-color: #2d3748;
@@ -1708,7 +1702,7 @@ body.dark-mode .roadmap-item.done {
   color: #9ca3af;
 }
 
-/* Dark mode progress */
+
 body.dark-mode .progress-container {
   background: #16213e;
 }
@@ -1725,7 +1719,7 @@ body.dark-mode .progress-bar-fill {
   background: #667eea;
 }
 
-/* Dark mode congratulations */
+
 body.dark-mode .congratulations-title {
   color: #a78bfa;
 }
@@ -1745,7 +1739,7 @@ body.dark-mode .reset-btn {
   border-color: #f87171 !important;
 }
 
-/* Dark mode timer */
+
 body.dark-mode .timer-display {
   color: #ffffff;
   text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
@@ -1773,7 +1767,7 @@ body.dark-mode .btn-reset {
   border-color: #2d3748 !important;
 }
 
-/* Dark mode nav */
+
 body.dark-mode .nav-btn {
   color: #e5e7eb;
 }
@@ -1788,7 +1782,7 @@ body.dark-mode .nav-btn.active {
   color: white;
 }
 
-/* Dark mode bottom nav */
+
 body.dark-mode .bottom-nav {
   background: #16213e;
   border-top-color: #2d3748;
@@ -1802,7 +1796,7 @@ body.dark-mode .nav-item.active {
   color: #a78bfa;
 }
 
-/* Dark mode profile grid */
+
 body.dark-mode .profile-grid input,
 body.dark-mode .profile-grid select {
   background: #16213e;
@@ -1810,19 +1804,19 @@ body.dark-mode .profile-grid select {
   border-color: #2d3748;
 }
 
-/* Dark mode advice column */
+
 body.dark-mode .advice-column {
   background: #16213e;
   border-color: #2d3748;
 }
 
-/* Dark mode chat column */
+
 body.dark-mode .chat-column {
   background: #1a1a2e;
   border-color: #2d3748;
 }
 
-/* Dark mode modal */
+
 body.dark-mode .modal-overlay {
   background: rgba(0, 0, 0, 0.85);
 }
@@ -1837,7 +1831,7 @@ body.dark-mode .close-modal-btn {
   background: #667eea;
 }
 
-/* Dark mode sidebar search */
+
 body.dark-mode .sidebar-search {
   background: #16213e;
   border-color: #2d3748;
@@ -1848,13 +1842,13 @@ body.dark-mode .sidebar-search input {
   color: #f9fafb;
 }
 
-/* Dark mode old notes section */
+
 body.dark-mode .sidebar-note-item:hover {
   background: #1a1a2e;
   color: #a78bfa;
 }
 
-/* Dark mode session titles - chat sidebar */
+
 body.dark-mode .session-title {
   color: #ffffff;
 }
@@ -1899,7 +1893,7 @@ body.dark-mode .session-dropdown button.delete-btn:hover {
   background: #1a1a2e;
 }
 
-/* Dark mode timer reset button */
+
 body.dark-mode .btn-reset {
   background: #1a1a2e !important;
   color: #e5e7eb !important;
@@ -1911,7 +1905,7 @@ body.dark-mode .btn-reset:hover {
   color: #ffffff !important;
 }
 
-/* Dark mode logout button */
+
 body.dark-mode .logout-btn {
   background: #1a1a2e !important;
   color: #e5e7eb !important;
@@ -1934,7 +1928,7 @@ body.dark-mode .primary-btn.logout-btn:hover {
   color: #f87171 !important;
 }
 
-/* Dark mode AI mode buttons (Koç/Tavsiye toggle) */
+
 body.dark-mode .ai-mode-btn {
   background: #1a1a2e;
   color: #e5e7eb;
@@ -1969,7 +1963,7 @@ body.dark-mode .toggle-btn:hover:not(.active) {
   color: #a78bfa;
 }
 
-/* Dark mode sidebar logout button (inline style override) */
+
 body.dark-mode .sidebar-panel button[style*="fed7d7"],
 body.dark-mode .sidebar-panel button[style*="background: #fed7d7"],
 body.dark-mode .sidebar-panel .primary-btn[style*="marginTop: auto"] {
@@ -1985,13 +1979,13 @@ body.dark-mode .sidebar-panel .primary-btn[style*="marginTop: auto"]:hover {
   color: #f87171 !important;
 }
 
-/* Dark mode sidebar panel background */
+
 body.dark-mode .sidebar-panel {
   background: #16213e;
   box-shadow: 5px 0 25px rgba(0,0,0,0.3);
 }
 
-/* Dark mode all buttons in sidebar with inline styles */
+
 body.dark-mode aside button[style],
 body.dark-mode .sidebar-panel button[style] {
   background: #1a1a2e !important;
@@ -2005,17 +1999,15 @@ body.dark-mode .sidebar-panel button[style]:hover {
   color: #f87171 !important;
 }
 
-/* ========================================
-   MOBILE DARK MODE FIXES
-   ======================================== */
+
 
 @media (max-width: 768px) {
-  /* Dark mode sidebar */
+  
   body.dark-mode .sidebar-panel {
     background: #16213e;
   }
 
-  /* Dark mode bottom nav */
+  
   body.dark-mode .bottom-nav {
     background: #16213e;
     border-top-color: #2d3748;
@@ -2029,13 +2021,13 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: #a78bfa;
   }
 
-  /* Dark mode content card */
+  
   body.dark-mode .content-card {
     background: #1a1a2e !important;
     color: #e5e7eb;
   }
 
-  /* Dark mode inputs */
+  
   body.dark-mode input,
   body.dark-mode select,
   body.dark-mode textarea {
@@ -2049,7 +2041,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: #9ca3af !important;
   }
 
-  /* Dark mode notes */
+  
   body.dark-mode .create-note-box {
     background: #16213e;
     border-color: #2d3748;
@@ -2074,7 +2066,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     border-color: #2d3748;
   }
 
-  /* Dark mode roadmap */
+  
   body.dark-mode .roadmap-item {
     background: #1a1a2e;
     border-color: #2d3748;
@@ -2086,14 +2078,14 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: #9ca3af;
   }
 
-  /* Dark mode AI advice box */
+  
   body.dark-mode .ai-advice-box {
     background: #1a1a2e;
     color: #e5e7eb;
     border-color: #2d3748;
   }
 
-  /* Dark mode chat */
+  
   body.dark-mode .chat-sidebar {
     background: #16213e;
     border-right-color: #2d3748;
@@ -2113,7 +2105,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: #e5e7eb;
   }
 
-  /* Dark mode session items */
+  
   body.dark-mode .session-item {
     border-bottom-color: #2d3748;
   }
@@ -2136,7 +2128,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: #e5e7eb;
   }
 
-  /* Dark mode AI mode buttons */
+  
   body.dark-mode .ai-mode-btn {
     background: #1a1a2e;
     color: #e5e7eb;
@@ -2159,19 +2151,19 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: white;
   }
 
-  /* Dark mode advice column */
+  
   body.dark-mode .advice-column {
     background: #16213e;
     border-color: #2d3748;
   }
 
-  /* Dark mode chat column */
+  
   body.dark-mode .chat-column {
     background: #1a1a2e;
     border-color: #2d3748;
   }
 
-  /* Dark mode profile grid */
+  
   body.dark-mode .profile-grid input,
   body.dark-mode .profile-grid select {
     background: #16213e !important;
@@ -2183,7 +2175,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: #9ca3af !important;
   }
 
-  /* Dark mode timer */
+  
   body.dark-mode .timer-display {
     color: #f9fafb;
     text-shadow: 2px 2px 0px #2d3748;
@@ -2206,7 +2198,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     border-color: #2d3748 !important;
   }
   
-  /* Timer arka plan seçici mobil */
+  
   .focus-wrapper > div[style*="position: absolute"][style*="display: flex"] {
     top: 10px !important;
     right: 10px !important;
@@ -2231,13 +2223,13 @@ body.dark-mode .sidebar-panel button[style]:hover {
     max-height: 60vh !important;
   }
   
-  /* Timer display mobil */
+  
   .timer-display {
     font-size: 3.5rem !important;
     margin: 15px 0 !important;
   }
   
-  /* Timer inputs mobil */
+  
   .timer-inputs {
     gap: 12px !important;
     padding: 12px !important;
@@ -2254,7 +2246,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     font-size: 0.95rem !important;
   }
   
-  /* Timer controls mobil */
+  
   .timer-controls {
     gap: 10px !important;
     flex-wrap: wrap !important;
@@ -2267,32 +2259,32 @@ body.dark-mode .sidebar-panel button[style]:hover {
     min-width: 100px !important;
   }
   
-  /* Focus wrapper başlık */
+  
   .focus-wrapper h2 {
     font-size: 1.3rem !important;
     margin-bottom: 10px !important;
   }
 }
 
-  /* Dark mode feature boxes */
+  
   body.dark-mode .f-box {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
   }
 
-  /* Dark mode modal */
+  
   body.dark-mode .modal-content {
     background: #1a1a2e;
     color: #f9fafb;
   }
 
-  /* Dark mode open notes button */
+  
   body.dark-mode .open-notes-modal-btn {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
   }
 
-/* Mobile dark mode - primary buttons */
+
 @media (max-width: 768px) {
   body.dark-mode .primary-btn {
     background: linear-gradient(to right, #667eea, #764ba2);
@@ -2313,7 +2305,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
   }
 }
 
-/* Mobile - Input zone fixes */
+
 @media (max-width: 768px) {
   .input-zone,
   .chat-column .input-zone,
@@ -2390,7 +2382,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     color: white !important;
   }
 
-  /* Chat column full width */
+  
   .chat-column {
     width: 100% !important;
     max-width: 100% !important;
@@ -2406,7 +2398,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     padding: 12px !important;
   }
 
-  /* Bubble assistant smaller */
+  
   .bubble.assistant {
     max-width: 75%;
     font-size: 13px;
@@ -2427,7 +2419,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
     font-size: 13px;
   }
 
-  /* Action button smaller */
+  
   .action-btn {
     font-size: 12px !important;
     padding: 8px 12px !important;
@@ -2445,17 +2437,17 @@ body.dark-mode .sidebar-panel button[style]:hover {
     width: 85% !important;
   }
 
-  /* Advice column container */
+  
   .advice-column {
     padding: 12px !important;
   }
 
-  /* Profile grid no margin top */
+  
   .profile-grid {
     margin-top: 0 !important;
   }
 
-  /* Roadmap items closer */
+  
   .roadmap-item {
     margin-bottom: 5px !important;
   }
@@ -2465,7 +2457,7 @@ body.dark-mode .sidebar-panel button[style]:hover {
   }
 }
 
-/* Dark mode AI advice box headings */
+
 body.dark-mode .ai-advice-box h3,
 body.dark-mode .ai-advice-box h4,
 body.dark-mode .ai-advice-box strong {
@@ -2483,7 +2475,7 @@ body.dark-mode .ai-advice-box {
   color: #e5e7eb;
 }
 
-/* Login container text colors */
+
 .login-container h2,
 .login-container h3,
 .login-container label,
@@ -2502,12 +2494,9 @@ body.dark-mode .ai-advice-box {
 }
 
 
-/* ========================================
-   🍂 AUTUMN MODE (Sonbahar Teması)
-   Açık Krem, Beyaz, Kahve Tonları
-   ======================================== */
 
-/* Autumn mode için tüm kartlar - TON FARKLARI */
+
+
 body.autumn-mode .content-card {
   background: #FAF6F0;
   color: #3d3026;
@@ -2528,7 +2517,7 @@ body.autumn-mode .sidebar-panel {
   color: #3d3026;
 }
 
-/* Autumn mode input'lar */
+
 body.autumn-mode input,
 body.autumn-mode select,
 body.autumn-mode textarea {
@@ -2541,13 +2530,13 @@ body.autumn-mode input::placeholder {
   color: #8B7D6B;
 }
 
-/* Autumn mode butonlar */
+
 body.autumn-mode .primary-btn {
   background: linear-gradient(to right, #C19A6B, #A67C52);
   color: #fff;
 }
 
-/* Autumn mode notlar */
+
 body.autumn-mode .note-card {
   background: #FFF9F0;
   border-top-color: #D4A574;
@@ -2578,7 +2567,7 @@ body.autumn-mode .create-note-box {
   border-color: #E8D5C4;
 }
 
-/* Autumn mode - Notları Görüntüle Butonu */
+
 body.autumn-mode .open-notes-modal-btn {
   background: linear-gradient(135deg, #C19A6B, #A67C52);
   color: white;
@@ -2589,7 +2578,7 @@ body.autumn-mode .open-notes-modal-btn:hover {
   box-shadow: 0 6px 15px rgba(193, 154, 107, 0.4);
 }
 
-/* Autumn mode chat */
+
 body.autumn-mode .bubble.user {
   background: #C19A6B;
   color: white;
@@ -2620,7 +2609,7 @@ body.autumn-mode .input-zone {
   border-top-color: #E8D5C4;
 }
 
-/* Autumn mode session items */
+
 body.autumn-mode .session-item {
   border-bottom-color: #E8D5C4;
 }
@@ -2657,7 +2646,7 @@ body.autumn-mode .session-dropdown button:hover {
   color: #8B6F47;
 }
 
-/* Autumn mode roadmap */
+
 body.autumn-mode .roadmap-item {
   background: #FDFBF7;
   border-color: #E8D5C4;
@@ -2669,7 +2658,7 @@ body.autumn-mode .roadmap-item.done {
   color: #8B7D6B;
 }
 
-/* Autumn mode progress */
+
 body.autumn-mode .progress-container {
   background: #FFF9F0;
 }
@@ -2686,7 +2675,7 @@ body.autumn-mode .progress-bar-fill {
   background: #C19A6B;
 }
 
-/* Autumn mode congratulations */
+
 body.autumn-mode .congratulations-title {
   color: #8B6F47;
 }
@@ -2706,7 +2695,7 @@ body.autumn-mode .reset-btn {
   border-color: #D4A574 !important;
 }
 
-/* Autumn mode timer */
+
 body.autumn-mode .timer-display {
   color: #3d3026;
   text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
@@ -2733,7 +2722,7 @@ body.autumn-mode .btn-reset {
   border-color: #D4C5B9 !important;
 }
 
-/* Autumn mode nav */
+
 body.autumn-mode .nav-btn {
   color: #3d3026;
 }
@@ -2748,7 +2737,7 @@ body.autumn-mode .nav-btn.active {
   color: white;
 }
 
-/* Autumn mode dashboard wrapper ve main content */
+
 body.autumn-mode .dashboard-wrapper {
   background: rgba(245, 230, 211, 0.3) !important;
 }
@@ -2758,7 +2747,7 @@ body.autumn-mode .main-content {
 }
 
 
-/* Autumn mode bottom nav */
+
 body.autumn-mode .bottom-nav {
   background: #F5F0E8;
   border-top-color: #E8D5C4;
@@ -2772,7 +2761,7 @@ body.autumn-mode .nav-item.active {
   color: #8B6F47;
 }
 
-/* Autumn mode profile grid */
+
 body.autumn-mode .profile-grid input,
 body.autumn-mode .profile-grid select {
   background: #FFFFFF;
@@ -2780,19 +2769,19 @@ body.autumn-mode .profile-grid select {
   border-color: #D4C5B9;
 }
 
-/* Autumn mode advice column */
+
 body.autumn-mode .advice-column {
   background: #F5F0E8;
   border-color: #E8D5C4;
 }
 
-/* Autumn mode chat column */
+
 body.autumn-mode .chat-column {
   background: #FAF6F0;
   border-color: #E8D5C4;
 }
 
-/* Autumn mode modal */
+
 body.autumn-mode .modal-overlay {
   background: rgba(212, 165, 116, 0.5);
 }
@@ -2807,7 +2796,7 @@ body.autumn-mode .close-modal-btn {
   background: #C19A6B;
 }
 
-/* Autumn mode sidebar search */
+
 body.autumn-mode .sidebar-search {
   background: #FFF8F0;
   border-color: #E8D5C4;
@@ -2818,13 +2807,13 @@ body.autumn-mode .sidebar-search input {
   color: #3d3026;
 }
 
-/* Autumn mode old notes section */
+
 body.autumn-mode .sidebar-note-item:hover {
   background: #FFF9F0;
   color: #8B6F47;
 }
 
-/* Autumn mode AI advice box headings */
+
 body.autumn-mode .ai-advice-box h3,
 body.autumn-mode .ai-advice-box h4,
 body.autumn-mode .ai-advice-box strong {
@@ -2842,7 +2831,7 @@ body.autumn-mode .ai-advice-box {
   color: #3d3026;
 }
 
-/* Autumn mode AI mode buttons */
+
 body.autumn-mode .ai-mode-btn {
   background: #FFF8F0;
   color: #3d3026;
@@ -2877,18 +2866,18 @@ body.autumn-mode .toggle-btn:hover:not(.active) {
   color: #8B6F47;
 }
 
-/* Autumn mode theme toggle */
+
 body.autumn-mode .theme-toggle {
   background: rgba(255, 248, 240, 0.3);
 }
 
-/* Autumn mode feature boxes */
+
 body.autumn-mode .f-box {
   background: linear-gradient(135deg, #C19A6B, #A67C52);
   color: white;
 }
 
-/* Autumn mode logout button */
+
 body.autumn-mode .logout-btn,
 body.autumn-mode .primary-btn.logout-btn {
   background: #FFF8F0 !important;
@@ -2903,17 +2892,15 @@ body.autumn-mode .primary-btn.logout-btn:hover {
 }
 
 
-/* ========================================
-   MOBİL TEMA FİXLER (Dark & Autumn)
-   ======================================== */
+
 
 @media (max-width: 768px) {
-  /* Dark mode - sidebar */
+  
   body.dark-mode .sidebar-panel {
     background: #16213e !important;
   }
 
-  /* Dark mode - bottom nav */
+  
   body.dark-mode .bottom-nav {
     background: #16213e !important;
     border-top-color: #1a1a2e !important;
@@ -2927,12 +2914,12 @@ body.autumn-mode .primary-btn.logout-btn:hover {
     color: #667eea !important;
   }
 
-  /* Autumn mode - sidebar */
+  
   body.autumn-mode .sidebar-panel {
     background: #F5F0E8 !important;
   }
 
-  /* Autumn mode - bottom nav */
+  
   body.autumn-mode .bottom-nav {
     background: #F5F0E8 !important;
     border-top-color: #E8D5C4 !important;
@@ -2948,11 +2935,9 @@ body.autumn-mode .primary-btn.logout-btn:hover {
 }
 
 
-/* ========================================
-   GOOGLE OAUTH BUTTON STYLING
-   ======================================== */
 
-/* Google button container */
+
+
 .google-login-container {
   display: flex;
   justify-content: center;
@@ -2962,17 +2947,17 @@ body.autumn-mode .primary-btn.logout-btn:hover {
   padding: 10px 0;
 }
 
-/* Dark mode için Google button */
+
 body.dark-mode .google-login-container {
   filter: brightness(0.9);
 }
 
-/* Autumn mode için Google button */
+
 body.autumn-mode .google-login-container {
   filter: sepia(0.2);
 }
 
-/* Login container içindeki ayırıcı */
+
 .login-container .divider {
   display: flex;
   align-items: center;
@@ -3004,9 +2989,7 @@ body.autumn-mode .login-container .divider::after {
 }
 
 
-/* ========================================
-   LOGIN/REGISTER HATA MESAJLARI
-   ======================================== */
+
 
 .error-message {
   background: #fee2e2;
@@ -3047,7 +3030,7 @@ body.autumn-mode .login-container .divider::after {
   gap: 8px;
 }
 
-/* Dark mode için mesajlar */
+
 body.dark-mode .error-message {
   background: #7f1d1d;
   color: #fecaca;
@@ -3066,7 +3049,7 @@ body.dark-mode .warning-message {
   border-left-color: #fbbf24;
 }
 
-/* Autumn mode için mesajlar */
+
 body.autumn-mode .error-message {
   background: #fef2f2;
   color: #991b1b;
@@ -3086,7 +3069,7 @@ body.autumn-mode .warning-message {
 }
 
 
-/* MOBİL SCROLL DÜZELTMESİ */
+
 @media (max-width: 768px) {
   body {
     overflow-y: auto;
@@ -3126,7 +3109,7 @@ body.autumn-mode .warning-message {
     flex-direction: column;
   }
   
-  /* Bottom Navigation - Sabit alt menü */
+  
   .bottom-nav {
     position: fixed !important;
     bottom: 0 !important;
@@ -3138,7 +3121,7 @@ body.autumn-mode .warning-message {
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
   }
   
-  /* Timer ve diğer bileşenler için */
+  
   .timer-container,
   .focus-mode-container {
     width: 100% !important;
@@ -3146,7 +3129,7 @@ body.autumn-mode .warning-message {
     overflow-x: hidden !important;
   }
   
-  /* Butonlar ve inputlar taşmasın */
+  
   .primary-btn,
   .action-btn,
   input,
@@ -3158,7 +3141,7 @@ body.autumn-mode .warning-message {
 }
 
 
-/* MOBİL TIMER DÜZELTMESİ - iPhone 13 ve benzeri */
+
 @media (max-width: 768px) {
   .focus-wrapper .timer-display {
     font-size: 3rem;
@@ -3183,7 +3166,7 @@ body.autumn-mode .warning-message {
     box-sizing: border-box !important;
   }
   
-  /* Tam ekran timer */
+  
   .fullscreen-timer {
     width: 100vw !important;
     height: 100vh !important;
@@ -3194,7 +3177,7 @@ body.autumn-mode .warning-message {
   }
 }
 
-/* Çok küçük ekranlar (iPhone SE, iPhone 13 mini) */
+
 @media (max-width: 400px) {
   .timer-display {
     font-size: 2.5rem !important;
@@ -3206,7 +3189,7 @@ body.autumn-mode .warning-message {
 }
 
 
-/* MOBİL - Dark Mode Bottom Nav Sabit */
+
 @media (max-width: 768px) {
   body.dark-mode .bottom-nav {
     position: fixed;
@@ -3226,7 +3209,7 @@ body.autumn-mode .warning-message {
 }
 
 
-/* LANDING PAGE YENİ TASARIM */
+
 .landing-container {
   min-height: 100vh;
   padding: 20px 20px;
@@ -3282,7 +3265,7 @@ body.autumn-mode .warning-message {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* Autumn mode için feature card */
+
 body.autumn-mode .feature-card {
   background: rgba(61, 48, 38, 0.4);
   border: 1px solid rgba(61, 48, 38, 0.5);
@@ -3298,7 +3281,7 @@ body.autumn-mode .feature-card p {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Dark mode için feature card */
+
 body.dark-mode .feature-card {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -3337,16 +3320,16 @@ body.dark-mode .feature-card:hover {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Mobil için */
+
 @media (max-width: 768px) {
-  /* Landing container - tema butonuna yer aç */
+  
   .landing-container {
-    padding-top: 40px; /* Üstten daha az boşluk, hero-title zaten margin-top alacak */
+    padding-top: 40px; 
   }
   
   .hero-title {
     font-size: 2.5rem;
-    margin-top: 80px; /* Tema değiştirme butonunun altına kaydır */
+    margin-top: 80px; 
   }
   
   .hero-subtitle {
@@ -3354,35 +3337,35 @@ body.dark-mode .feature-card:hover {
   }
   
   .features-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2'li yan yana */
-    gap: 12px; /* Daha az boşluk */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px; 
     margin-top: 40px;
   }
   
   .feature-card {
-    padding: 16px; /* Daha küçük padding */
-    border-radius: 12px; /* Daha küçük border-radius */
+    padding: 16px; 
+    border-radius: 12px; 
   }
   
   .feature-card .feature-icon {
-    font-size: 2rem; /* İkon daha küçük */
+    font-size: 2rem; 
     margin-bottom: 8px;
   }
   
   .feature-card h3 {
-    font-size: 0.95rem; /* Başlık daha küçük */
+    font-size: 0.95rem; 
     margin-bottom: 6px;
   }
   
   .feature-card p {
-    font-size: 0.8rem; /* Açıklama daha küçük */
+    font-size: 0.8rem; 
     line-height: 1.4;
   }
 }
 
-/* === SADECE AI KOÇ CHAT SAYFASI İÇİN === */
 
-/* Sol sidebar - SADECE AI KOÇ SAYFASINDA */
+
+
 .coach-grid .sidebar-panel {
   width: 300px !important;
   min-width: 280px !important;
@@ -3394,7 +3377,7 @@ body.dark-mode .feature-card:hover {
   background: rgba(255,255,255,0.08) !important;
 }
 
-/* Sidebar içindeki elementler - SADECE AI KOÇ SAYFASINDA */
+
 .coach-grid .sidebar-search,
 .coach-grid .chat-sidebar .primary-btn,
 .coach-grid .session-item {
@@ -3404,7 +3387,7 @@ body.dark-mode .feature-card:hover {
   box-sizing: border-box !important;
 }
 
-/* Input zone - SADECE AI KOÇ SAYFASINDA */
+
 .coach-grid .input-zone {
   width: 100% !important;
   max-width: none !important;
@@ -3416,7 +3399,7 @@ body.dark-mode .feature-card:hover {
   border-radius: 0 !important;
 }
 
-/* Input kutusu - SADECE AI KOÇ SAYFASINDA */
+
 .coach-grid .input-zone input {
   flex: 1 1 auto !important;
   min-width: 0 !important;
@@ -3431,7 +3414,7 @@ body.dark-mode .feature-card:hover {
   font-size: 15px !important;
 }
 
-/* Gönder butonu - SADECE AI KOÇ SAYFASINDA */
+
 .coach-grid .input-zone .primary-btn {
   width: 52px !important;
   min-width: 52px !important;
@@ -3444,7 +3427,7 @@ body.dark-mode .feature-card:hover {
   flex-shrink: 0;
 }
 
-/* Chat main ve messages area - SADECE AI KOÇ SAYFASINDA */
+
 .coach-grid .chat-main,
 .coach-grid .messages-area {
   width: 100% !important;
@@ -3453,7 +3436,7 @@ body.dark-mode .feature-card:hover {
   padding: 0 !important;
 }
 
-/* Container'lar - SADECE AI KOÇ SAYFASINDA */
+
 .coach-grid .chat-column,
 .coach-grid.coach-grid {
   margin: 0 !important;
