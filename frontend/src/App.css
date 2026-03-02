@@ -3473,9 +3473,9 @@ body.dark-mode .feature-card:hover {
   width: 100% !important;
   max-width: 400px !important;
 }
-/* Tablet ve orta ekranlar için düzeltme */
+
 @media (min-width: 769px) and (max-width: 1024px) {
-  /* Chat grid'i tek sütun yap */
+  
   .coach-grid {
     display: flex;
     flex-direction: column;
@@ -3483,27 +3483,27 @@ body.dark-mode .feature-card:hover {
     height: auto;
   }
 
-  /* Tavsiye kutusu */
+ 
   .advice-column {
     width: 100%;
     min-height: 200px;
     max-height: 300px;
   }
 
-  /* Chat kolonu */
+ 
   .chat-column {
     width: 100%;
     height: 500px;
     min-height: 400px;
   }
 
-  /* Chat sidebar daralt */
+  
   .chat-sidebar {
     width: 180px;
     padding: 10px;
   }
 
-  /* Mesaj input alanı */
+
   .input-zone {
     padding: 10px;
     gap: 8px;
@@ -3514,13 +3514,13 @@ body.dark-mode .feature-card:hover {
     padding: 10px;
   }
 
-  /* Sidebar daralt */
+  
   .sidebar-panel {
     width: 180px;
     padding: 15px 8px;
   }
 
-  /* Ana içerik */
+ 
   .main-content {
     padding: 15px 10px;
   }
@@ -3529,7 +3529,7 @@ body.dark-mode .feature-card:hover {
     padding: 15px;
   }
 
-  /* Butonlar */
+ 
   .ai-mode-buttons {
     flex-direction: row;
     gap: 10px;
@@ -3538,5 +3538,36 @@ body.dark-mode .feature-card:hover {
   .ai-mode-btn {
     font-size: 13px;
     padding: 10px 12px;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  
+  .chat-column {
+    width: 100%;
+    height: 65vh;  
+    min-height: 500px;  
+  }
+
+  
+  .messages-area {
+    min-height: 400px;
+    flex: 1;
+  }
+
+  
+  .content-card {
+    min-height: 85vh;  
+  }
+
+  
+  .advice-column {
+    width: 100%;
+    min-height: 150px;
+    max-height: 250px;
+  }
+
+  .ai-advice-box {
+    min-height: 120px;
+    max-height: 200px;
   }
 }
