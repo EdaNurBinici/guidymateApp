@@ -3445,3 +3445,31 @@ body.dark-mode .feature-card:hover {
   max-width: none !important;
   border-radius: 0 !important;
 }
+
+
+.google-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.google-login-container > div {
+  width: 100% !important;
+  max-width: 400px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.google-login-container iframe {
+  width: 100% !important;
+  max-width: 400px !important;
+  margin: 0 auto !important;
+}
+
+.google-login-container div[role="button"] {
+  width: 100% !important;
+  max-width: 400px !important;
+}
