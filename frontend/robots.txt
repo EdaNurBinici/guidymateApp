@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://guidymate.com.tr/sitemap.xml
