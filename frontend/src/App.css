@@ -759,7 +759,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
 
 
-@media (max-width: 1000px) { .coach-grid { flex-direction: column; height: auto; } .advice-column, .chat-column { width: 100%; height: 400px; } .sidebar-panel { width: 200px; } .notes-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 1000px) { .coach-grid { flex-direction: column; height: auto !important; min-height: 120vh !important; } .advice-column { width: 100%; height: 200px !important; min-height: 150px !important; max-height: 250px !important; } .chat-column { width: 100%; height: calc(120vh - 280px) !important; min-height: 700px !important; flex: 1 !important; } .content-card { min-height: 120vh !important; height: auto !important; } .sidebar-panel { width: 200px; } .notes-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) { .sidebar-panel { width: 70px; padding: 15px 5px; align-items: center; } .nav-btn { font-size: 0; justify-content: center; } .nav-btn::first-letter { font-size: 1.5rem; } .old-notes-section { display: none; } .notes-grid { grid-template-columns: 1fr; } .timer-display { font-size: 4rem; } }
 
 @media (max-width: 768px) {.session-item { 
@@ -3480,7 +3480,19 @@ body.dark-mode .feature-card:hover {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    height: auto;
+    height: auto;  /* 100px değil, auto olmalı */
+    min-height: 100vh;  /* Ekranın %80'i minimum */
+  }
+
+  .chat-column {
+    width: 100%;
+    height: 60vh;  /* Ekranın %60'ı */
+    min-height: 500px;
+  }
+
+  .advice-column {
+    width: 100%;
+    max-height: 250px;
   }
 
  
