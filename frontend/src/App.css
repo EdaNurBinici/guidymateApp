@@ -3464,6 +3464,12 @@ body.dark-mode .feature-card:hover {
   justify-content: center !important;
 }
 
+.google-login-container > div > div {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
 .google-login-container iframe {
   width: 100% !important;
   max-width: 400px !important;
@@ -3475,8 +3481,18 @@ body.dark-mode .feature-card:hover {
   width: 100% !important;
   max-width: 400px !important;
   margin: 0 auto !important;
-  display: block !important;
-  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.google-login-container [data-client-id] {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.google-login-container [data-client-id] > div {
+  margin: 0 auto !important;
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
