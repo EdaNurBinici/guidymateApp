@@ -96,6 +96,15 @@ Built with MVC-inspired structure:
 
 ---
 
+## SEO & Performance
+
+- **Meta Tags:** Comprehensive SEO meta tags including title, description, and keywords
+- **Open Graph Tags:** Optimized social media preview cards for LinkedIn, Facebook, and Twitter
+- **Sitemap & Robots.txt:** Search engine indexing optimization
+- **Google Search Console:** Verified and integrated for search analytics
+
+---
+
 ## Documentation
 
 - [Setup Guide](./docs/SETUP.md)
