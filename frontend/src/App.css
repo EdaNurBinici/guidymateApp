@@ -3630,7 +3630,10 @@ body.dark-mode .feature-card:hover {
   .dashboard-wrapper {
     flex-direction: row !important;
     height: 100vh !important;
+    width: 100vw !important;
     overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .nav-btn {
@@ -3643,17 +3646,22 @@ body.dark-mode .feature-card:hover {
     padding-top: 70px !important;
     overflow-y: auto !important;
     height: 100vh !important;
-    width: 100% !important;
+    width: 100vw !important;
+    margin: 0 !important;
   }
 
   .content-card {
     min-height: auto !important;
     height: 100% !important;
     padding: 15px 10px !important;
+    margin: 0 !important;
+    width: 100% !important;
   }
 
   .focus-wrapper {
     padding: 10px !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
   .timer-display {
@@ -3677,6 +3685,16 @@ body.dark-mode .feature-card:hover {
   .timer-btn {
     padding: 10px 20px !important;
     font-size: 1rem !important;
+  }
+
+  .bottom-nav {
+    display: none !important;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
   }
 }
 
