@@ -327,10 +327,16 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
+  max-height: 100dvh;
   z-index: 9999;
   padding: 0;
   margin: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -357,7 +363,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
 
 .focus-wrapper.fullscreen-mode .timer-display {
-  font-size: 8rem !important; 
+  font-size: 6rem !important; 
   margin: 0 !important;
 }
 
@@ -447,7 +453,19 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
 
 
+@media (max-width: 768px) {
+  .focus-wrapper.fullscreen-mode {
+    width: 100%;
+    height: 100dvh;
+    padding: 16px;
+  }
 
+  .focus-wrapper.fullscreen-mode .timer-display {
+    font-size: 4rem !important;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+}
 
 
 .advice-column{
@@ -462,7 +480,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
   display: flex;
   width: 100%;
   height: 60vh;
-  max-height: none;
+  max-height: 60vh;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   overflow: hidden;
@@ -681,9 +699,10 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
 .advice-column {
     width: 100%;
+    height: 100% !important;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
     background: #f8f9fa;
     padding: 20px;
     border-radius: 15px;
@@ -759,7 +778,7 @@ input, select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e2
 
 
 
-@media (max-width: 1000px) { .coach-grid { flex-direction: column; height: auto !important; min-height: 120vh !important; } .advice-column { width: 100%; height: 200px !important; min-height: 150px !important; max-height: 250px !important; } .chat-column { width: 100%; height: calc(120vh - 280px) !important; min-height: 700px !important; flex: 1 !important; } .content-card { min-height: 120vh !important; height: auto !important; } .sidebar-panel { width: 200px; } .notes-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 1000px) { .coach-grid { flex-direction: column; height: auto !important; min-height: 120vh !important; } .advice-column { width: 100%; height: 700px !important; min-height: 150px !important; max-height: 1050px !important; } .chat-column { width: 100%; height: calc(120vh - 280px) !important; min-height: 700px !important;  min-height: 600px !important;flex: 1 !important; } .content-card { min-height: 120vh !important; height: auto !important; } .sidebar-panel { width: 200px; } .notes-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) { .sidebar-panel { width: 70px; padding: 15px 5px; align-items: center; } .nav-btn { font-size: 0; justify-content: center; } .nav-btn::first-letter { font-size: 1.5rem; } .old-notes-section { display: none; } .notes-grid { grid-template-columns: 1fr; } .timer-display { font-size: 4rem; } }
 
 @media (max-width: 768px) {.session-item { 
@@ -3446,55 +3465,23 @@ body.dark-mode .feature-card:hover {
   border-radius: 0 !important;
 }
 
-
 .google-login-container {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  margin-top: 20px !important;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .google-login-container > div {
   width: 100% !important;
-  max-width: 400px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.google-login-container > div > div {
-  width: 100% !important;
   display: flex !important;
   justify-content: center !important;
 }
 
-.google-login-container iframe {
-  width: 100% !important;
-  max-width: 400px !important;
-  margin: 0 auto !important;
-  display: block !important;
-}
-
+.google-login-container iframe,
 .google-login-container div[role="button"] {
+  max-width: 320px;
   width: 100% !important;
-  max-width: 400px !important;
-  margin: 0 auto !important;
-  display: flex !important;
-  justify-content: center !important;
 }
-
-.google-login-container [data-client-id] {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-}
-
-.google-login-container [data-client-id] > div {
-  margin: 0 auto !important;
-}
-
 @media (min-width: 769px) and (max-width: 1024px) {
   
   .coach-grid {
@@ -3603,4 +3590,96 @@ body.dark-mode .feature-card:hover {
     min-height: 120px;
     max-height: 200px;
   }
+}
+
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .hamburger-menu-btn {
+    display: block !important;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .sidebar-panel {
+    display: flex !important;
+    position: fixed !important;
+    left: -250px !important;
+    top: 0 !important;
+    height: 100vh !important;
+    width: 220px !important;
+    z-index: 1000 !important;
+    transition: left 0.3s ease !important;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.3) !important;
+  }
+
+  .sidebar-panel.sidebar-open {
+    left: 0 !important;
+  }
+
+  .dashboard-wrapper {
+    flex-direction: row !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  .nav-btn {
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .main-content {
+    padding: 10px !important;
+    padding-top: 70px !important;
+    overflow-y: auto !important;
+    height: 100vh !important;
+    width: 100% !important;
+  }
+
+  .content-card {
+    min-height: auto !important;
+    height: 100% !important;
+    padding: 15px 10px !important;
+  }
+
+  .focus-wrapper {
+    padding: 10px !important;
+  }
+
+  .timer-display {
+    font-size: 4rem !important;
+  }
+
+  .timer-inputs {
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+
+  .timer-input {
+    width: 60px !important;
+    padding: 8px !important;
+  }
+
+  .timer-controls {
+    gap: 10px !important;
+  }
+
+  .timer-btn {
+    padding: 10px 20px !important;
+    font-size: 1rem !important;
+  }
+}
+
+.hamburger-menu-btn {
+  display: none;
 }

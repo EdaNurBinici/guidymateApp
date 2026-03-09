@@ -35,7 +35,8 @@ function App() {
   const [view, setView] = useState("landing");
   const [activeTab, setActiveTab] = useState("profile");
   
-  const [mobileAiMode, setMobileAiMode] = useState("advice"); // mobilde varsayılan: tavsiye modu
+  const [mobileAiMode, setMobileAiMode] = useState("advice");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   const [message, setMessage] = useState("");
   const [notification, setNotification] = useState(null);
@@ -801,23 +802,25 @@ function App() {
           {}
           {GOOGLE_ENABLED && (
             <div className="google-login-container">
-              <div style={{ width: "100%", maxWidth: "400px" }}>
-                <p style={{ color: "#718096", marginBottom: "15px", textAlign: "center" }}>{t.orText}</p>
-                <GoogleLogin
-                  onSuccess={handleGoogleLogin}
-                  onError={(error) => {
-                    console.error('Google Login Error:', error);
-                    setMessage("❌ Google ile giriş başarısız. Lütfen tekrar dene.");
-                  }}
-                  text={view === "login" ? "signin_with" : "signup_with"}
-                  shape="rectangular"
-                  theme="outline"
-                  size="large"
-                  width="100%"
-                  ux_mode="popup"
-                useOneTap={false}
-                auto_select={false}
-              />
+              <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                <div style={{ width: "100%", maxWidth: "400px" }}>
+                  <p style={{ color: "#718096", marginBottom: "15px", textAlign: "center" }}>{t.orText}</p>
+                  <GoogleLogin
+                    onSuccess={handleGoogleLogin}
+                    onError={(error) => {
+                      console.error('Google Login Error:', error);
+                      setMessage("❌ Google ile giriş başarısız. Lütfen tekrar dene.");
+                    }}
+                    text={view === "login" ? "signin_with" : "signup_with"}
+                    shape="rectangular"
+                    theme="outline"
+                    size="large"
+                    width="400"
+                    ux_mode="popup"
+                    useOneTap={false}
+                    auto_select={false}
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -888,7 +891,7 @@ function App() {
       )}
 
       {}
-      <aside className="sidebar-panel" style={{ display: windowWidth >= 768 ? "flex" : "none" }}>
+      <aside className={`sidebar-panel ${isSidebarOpen ? "sidebar-open" : ""}`} style={{ display: windowWidth >= 768 ? "flex" : "none" }}>
         <div className="sidebar-title">{t.appName}</div>
         <div className="sidebar-menu">
           <div
@@ -967,6 +970,15 @@ function App() {
       </aside>
 
       <main className="main-content">
+        {}
+        <button 
+          className="hamburger-menu-btn"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          aria-label="Toggle menu"
+        >
+          {isSidebarOpen ? "✕" : "☰"}
+        </button>
+        
         <div className="content-card">
           {activeTab === "profile" && (
             <>
@@ -1216,6 +1228,7 @@ function App() {
       >
         <span
           className="session-title"
+          title={s.title || t.chatTitle}
           style={{
             color: coachSessionId === s.id ? "#667eea" : "#333",
             fontWeight: coachSessionId === s.id ? "bold" : "normal",
