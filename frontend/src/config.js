@@ -1,5 +1,5 @@
 
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+export const API_URL = import.meta.env.VITE_API_URL || 'https://web-app-api-5own.onrender.com';
 
 export const isDevelopment = import.meta.env.MODE === 'development';
 export const isProduction = import.meta.env.MODE === 'production';
