@@ -263,8 +263,16 @@ app.post("/coach/start", authMiddleware, async (req, res) => {
     ];
 
     const chat = await groq.chat.completions.create({ model: "llama-3.3-70b-versatile", messages: messages, temperature: 0.1 });
-    const msg = chat.choices[0]?.message?.content;
-    console.log("🤖 AI Response:", msg.substring(0, 100)); // DEBUG
+    let msg = chat.choices[0]?.message?.content;
+    
+    // Boş mesaj kontrolü
+    if (!msg || msg.trim() === "") {
+      msg = language === 'en' 
+        ? "Hello! I'm your career assistant. How can I help you today?"
+        : "Merhaba! Ben senin kariyer asistanınım. Bugün sana nasıl yardımcı olabilirim?";
+    }
+    
+    console.log("🤖 AI Response:", msg.substring(0, 100));
     await saveMsg(pool, { userId, sessionId, role: "assistant", content: msg });
     res.json({ sessionId, message: msg });
   } catch (err) { 
@@ -282,22 +290,30 @@ app.post("/coach/start", authMiddleware, async (req, res) => {
 app.post("/coach/reply", authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
-    const { sessionId, userMessage, language = 'tr' } = req.body; // Dil parametresi
-    console.log("🌍 Coach Reply - Language:", language); // DEBUG
+    const { sessionId, userMessage, language = 'tr' } = req.body;
+    console.log("🌍 Coach Reply - Language:", language);
     await saveMsg(pool, { userId, sessionId, role: "user", content: userMessage });
     
     await pool.query("UPDATE coach_sessions SET created_at = NOW() WHERE id = $1", [sessionId]);
 
-    const historyRes = await pool.query("SELECT role, content FROM coach_messages WHERE session_id = $1 ORDER BY id ASC LIMIT 15", [sessionId]);
+    const historyRes = await pool.query("SELECT role, content FROM coach_messages WHERE session_id = $1 ORDER BY id ASC LIMIT 5", [sessionId]);
     const messages = historyRes.rows.map(m => ({ role: m.role, content: m.content }));
     
     const SYSTEM_PROMPT = SYSTEM_PROMPTS[language] || SYSTEM_PROMPTS.tr;
-    console.log("📝 Using SYSTEM_PROMPT for language:", language); // DEBUG
+    console.log("📝 Using SYSTEM_PROMPT for language:", language);
     messages.unshift({ role: "system", content: SYSTEM_PROMPT });
     
     const chat = await groq.chat.completions.create({ model: "llama-3.3-70b-versatile", messages: messages, temperature: 0.1 });
-    const reply = chat.choices[0]?.message?.content;
-    console.log("🤖 AI Response:", reply.substring(0, 100)); // DEBUG
+    let reply = chat.choices[0]?.message?.content;
+    
+    // Boş mesaj kontrolü
+    if (!reply || reply.trim() === "") {
+      reply = language === 'en' 
+        ? "I'm having trouble responding right now. Please try again in a moment."
+        : "Şu an cevap vermekte zorluk yaşıyorum. Lütfen biraz sonra tekrar deneyin.";
+    }
+    
+    console.log("🤖 AI Response:", reply.substring(0, 100));
     await saveMsg(pool, { userId, sessionId, role: "assistant", content: reply });
     res.json({ message: reply });
   } catch (err) { 

@@ -104,17 +104,17 @@ body.dark-mode .language-option {
 
 @media (max-width: 768px) {
   .language-toggle {
-    top: 10px;
-    right: 65px;
+    top: 20px;
+    right: 50px;
   }
   
   .language-btn {
-    padding: 6px 10px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 10px;
   }
   
   .language-flag {
-    font-size: 16px;
+    font-size: 12px;
   }
   
   .language-dropdown {

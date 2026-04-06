@@ -892,7 +892,7 @@ function App() {
 
       {}
       <aside className={`sidebar-panel ${isSidebarOpen ? "sidebar-open" : ""}`} style={{ display: windowWidth >= 768 ? "flex" : "none" }}>
-        <div className="sidebar-title">{t.appName}</div>
+        <div className="sidebar-title">GuidyMate</div>
         <div className="sidebar-menu">
           <div
             className={`nav-btn ${activeTab === "profile" ? "active" : ""}`}
@@ -1207,7 +1207,7 @@ function App() {
     }}
     className="primary-btn new-chat-btn"
   >
-    {t.newChat}
+    <span style={{fontSize: '0.85em'}}>{t.newChat}</span>
   </button>
 
   {}
@@ -1277,6 +1277,11 @@ function App() {
                 <div ref={messagesEndRef} />
               </div>
 
+              {coachMessages.length >= 10 && (
+                <div style={{ padding: "10px", textAlign: "center", color: "#f56565", fontSize: "0.85rem", backgroundColor: "rgba(245, 101, 101, 0.1)", borderRadius: "4px", margin: "10px 0" }}>
+                  {language === 'en' ? "Chat limit reached. Start a new conversation for better responses." : "Sohbet limiti doldu. Daha iyi cevaplar için yeni bir sohbet başlat."}
+                </div>
+              )}
               <div className="input-zone">
                 <input
                   value={coachInput}
@@ -1284,13 +1289,13 @@ function App() {
                   placeholder={t.typeMessage}
                   style={{ flex: 1 }}
                   onKeyDown={(e) => e.key === "Enter" && sendCoachReply()}
-                  disabled={coachLoading}
+                  disabled={coachLoading || coachMessages.length >= 10}
                 />
                 <button
                   onClick={sendCoachReply}
                   className="primary-btn"
                   style={{ width: "auto", minWidth: "48px" }}
-                  disabled={coachLoading}
+                  disabled={coachLoading || coachMessages.length >= 10}
                 >
                   ➤
                 </button>
@@ -1326,7 +1331,7 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <h2>
+                  <h2 style={{ marginTop: '40px', marginBottom: '30px' }}>
                     {isExamMode ? t.examPrep : t.careerPath} - {t.level} {currentLevel}
                   </h2>
                   <div
@@ -1758,7 +1763,7 @@ function App() {
               )}
 
               <h2 style={{ color: isBreak ? "#48bb78" : "white", textShadow: "2px 2px 4px rgba(0,0,0,0.3)" }}>
-                {isBreak ? (language === 'en' ? '☕ BREAK TIME' : '☕ MOLA VAKTİ') : (language === 'en' ? '⚡ STUDY TIME' : '⚡ DERS VAKTİ')}
+                {isBreak ? (language === 'en' ? 'BREAK TIME' : 'MOLA VAKTİ') : (language === 'en' ? 'STUDY TIME' : 'DERS VAKTİ')}
               </h2>
               <div className="timer-display" style={{ color: "white", textShadow: "3px 3px 6px rgba(0,0,0,0.4)" }}>
                 {formatTime(timeLeft)}
