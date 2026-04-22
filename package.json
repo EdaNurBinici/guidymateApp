@@ -1,9 +1,13 @@
 {
-  "dependencies": {
-    "express-session": "^1.19.0",
-    "nodemailer": "^7.0.13",
-    "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0",
-    "react-markdown": "^10.1.0"
+  "name": "guidymate",
+  "version": "1.0.0",
+  "description": "AI Career Coach",
+  "main": "web-app-api/server.js",
+  "scripts": {
+    "start": "cd web-app-api && npm start",
+    "install": "cd web-app-api && npm install"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
