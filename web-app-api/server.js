@@ -48,6 +48,8 @@ const envAllowedOrigins = [
   .filter(Boolean);
 
 const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...envAllowedOrigins])];
+const defaultAllowedHeaders = 'Content-Type, Authorization, X-Requested-With';
+const allowedMethods = 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD';
 
 const corsOptions = {
   origin(origin, callback) {
@@ -56,17 +58,32 @@ const corsOptions = {
     }
 
     console.warn('Blocked by CORS:', origin);
-    return callback(new Error(`Not allowed by CORS: ${origin}`));
+    return callback(null, false);
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH', 'HEAD'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  methods: allowedMethods,
+  allowedHeaders: defaultAllowedHeaders,
   optionsSuccessStatus: 204,
   maxAge: 86400,
 };
 
 app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const requestHeaders = req.headers['access-control-request-headers'];
+
   res.header('Vary', 'Origin');
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', allowedMethods);
+    res.header('Access-Control-Allow-Headers', requestHeaders || defaultAllowedHeaders);
+  }
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+
   next();
 });
 
