@@ -71,17 +71,17 @@ app.use((req, res, next) => {
   const origin = req.headers.origin;
   const requestHeaders = req.headers['access-control-request-headers'];
 
-  res.header('Vary', 'Origin');
+  res.set('Vary', 'Origin');
 
   if (origin && allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', allowedMethods);
-    res.header('Access-Control-Allow-Headers', requestHeaders || defaultAllowedHeaders);
+    res.set('Access-Control-Allow-Origin', origin);
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.set('Access-Control-Allow-Methods', allowedMethods);
+    res.set('Access-Control-Allow-Headers', requestHeaders || defaultAllowedHeaders);
   }
 
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
+    return res.status(204).end();
   }
 
   next();
