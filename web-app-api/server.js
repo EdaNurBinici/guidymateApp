@@ -34,6 +34,7 @@ const app = express();
 const corsOptions = {
   origin: [
     'https://guidymate.com.tr',
+    'https://www.guidymate.com.tr',
     'http://localhost:3000',
     'http://localhost:5173',
     process.env.FRONTEND_URL
