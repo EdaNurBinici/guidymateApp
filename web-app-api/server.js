@@ -48,28 +48,25 @@ const envAllowedOrigins = [
   .filter(Boolean);
 
 const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...envAllowedOrigins])];
-const defaultAllowedHeaders = 'Content-Type, Authorization, X-Requested-With';
-const allowedMethods = 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD';
 
 const corsOptions = {
   origin(origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-
     console.warn('Blocked by CORS:', origin);
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-  methods: allowedMethods,
-  allowedHeaders: defaultAllowedHeaders,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH', 'HEAD'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   optionsSuccessStatus: 204,
   maxAge: 86400,
 };
 
 app.use(cors(corsOptions));
 
-console.log('CORS allowed origins:', allowedOrigins);
+console.log('✅ CORS configured for origins:', allowedOrigins);
 
 app.use(express.json());
 
