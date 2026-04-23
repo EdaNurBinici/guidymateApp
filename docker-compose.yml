@@ -22,16 +22,13 @@ services:
 
   # Backend API
   backend:
-    build: ./backend
+    build: ./web-app-api
     container_name: kariyer-backend
     environment:
-      DB_USER: postgres
-      DB_PASS: ${DB_PASS}
-      DB_NAME: ai_career_db
-      DB_HOST: postgres
-      DB_PORT: 5432
+      DATABASE_URL: postgresql://postgres:${DB_PASS}@postgres:5432/ai_career_db
       JWT_SECRET: ${JWT_SECRET}
       GROQ_API_KEY: ${GROQ_API_KEY}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       PORT: 5000
     ports:
       - "5000:5000"

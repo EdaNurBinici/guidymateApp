@@ -2,6 +2,15 @@ require("dotenv").config();
 
 console.log("🚀 Server starting... Version:", new Date().toISOString());
 
+// Check required environment variables
+const requiredEnvVars = ['GROQ_API_KEY', 'JWT_SECRET', 'DATABASE_URL'];
+const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+if (missingEnvVars.length > 0) {
+  console.error('❌ Missing required environment variables:', missingEnvVars.join(', '));
+  process.exit(1);
+}
+
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
@@ -31,7 +40,14 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000,
 });
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+let groq;
+try {
+  groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+  console.log("✅ Groq client initialized successfully");
+} catch (error) {
+  console.error("❌ Failed to initialize Groq client:", error.message);
+  process.exit(1);
+}
 
 async function saveMsg(pool, { userId, sessionId, role, content }) {
   await pool.query(

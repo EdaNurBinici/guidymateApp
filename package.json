@@ -4,8 +4,9 @@
   "description": "AI Career Coach",
   "main": "web-app-api/server.js",
   "scripts": {
-    "start": "cd web-app-api && npm start",
-    "install": "cd web-app-api && npm install"
+    "start": "node web-app-api/server.js",
+    "dev": "cd web-app-api && npm start",
+    "install": "npm install --prefix web-app-api"
   },
   "engines": {
     "node": "18.x"
