@@ -50,23 +50,11 @@ const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...envAllowedOrigi
 
 // Manual CORS middleware - Express 5 uyumlu
 app.use((req, res, next) => {
-  const origin = req.get('origin');
-  
-  console.log(`📨 ${req.method} ${req.path} - Origin: ${origin || 'none'}`);
-  
-  if (origin && allowedOrigins.includes(origin)) {
-    console.log(`✅ CORS allowed for origin: ${origin}`);
-    res.set('Access-Control-Allow-Origin', origin);
-    res.set('Access-Control-Allow-Credentials', 'true');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD');
-    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-    res.set('Access-Control-Max-Age', '86400');
-  } else if (origin) {
-    console.warn(`❌ CORS blocked for origin: ${origin}`);
-  }
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
   
   if (req.method === 'OPTIONS') {
-    console.log(`✅ OPTIONS request handled`);
     return res.status(204).end();
   }
   
