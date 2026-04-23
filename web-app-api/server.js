@@ -87,8 +87,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors(corsOptions));
-
 console.log('CORS allowed origins:', allowedOrigins);
 
 app.use(express.json());
