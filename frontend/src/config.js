@@ -1,5 +1,5 @@
 
-export const API_URL = 'https://guidymateapp-production.up.railway.app';
+export const API_URL = import.meta.env.VITE_API_URL || 'https://guidymateapp-production.up.railway.app';
 
 export const isDevelopment = import.meta.env.MODE === 'development';
 export const isProduction = import.meta.env.MODE === 'production';

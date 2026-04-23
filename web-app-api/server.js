@@ -30,32 +30,49 @@ try {
 
 const app = express();
 
-// CORS configuration - explicit headers
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    if (origin === 'https://guidymate.com.tr' || origin === 'https://www.guidymate.com.tr') {
-      res.set('Access-Control-Allow-Origin', origin);
+const defaultAllowedOrigins = [
+  'https://guidymate.com.tr',
+  'https://www.guidymate.com.tr',
+  'http://localhost:5173',
+  'http://localhost:3000',
+];
+
+const envAllowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.CORS_ORIGIN,
+  process.env.ALLOWED_ORIGINS,
+]
+  .filter(Boolean)
+  .flatMap((value) => value.split(','))
+  .map((value) => value.trim())
+  .filter(Boolean);
+
+const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...envAllowedOrigins])];
+
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
-    res.set('Access-Control-Allow-Credentials', 'true');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD');
-    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-    res.set('Access-Control-Max-Age', '86400');
-    return res.sendStatus(200);
-  }
-  
-  // Handle regular requests
-  if (origin === 'https://guidymate.com.tr' || origin === 'https://www.guidymate.com.tr') {
-    res.set('Access-Control-Allow-Origin', origin);
-  }
-  res.set('Access-Control-Allow-Credentials', 'true');
-  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  
+
+    console.warn('Blocked by CORS:', origin);
+    return callback(new Error(`Not allowed by CORS: ${origin}`));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH', 'HEAD'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  optionsSuccessStatus: 204,
+  maxAge: 86400,
+};
+
+app.use((req, res, next) => {
+  res.header('Vary', 'Origin');
   next();
 });
+
+app.use(cors(corsOptions));
+
+console.log('CORS allowed origins:', allowedOrigins);
 
 app.use(express.json());
 
