@@ -68,7 +68,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
 console.log('CORS allowed origins:', allowedOrigins);
 
