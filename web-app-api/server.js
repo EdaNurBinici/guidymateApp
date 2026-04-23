@@ -3,7 +3,7 @@ require("dotenv").config();
 console.log("🚀 Server starting... Version:", new Date().toISOString());
 
 // Check required environment variables
-const requiredEnvVars = ['GROQ_API_KEY', 'JWT_SECRET', 'DATABASE_URL'];
+const requiredEnvVars = ['GROQ_API_KEY', 'JWT_SECRET', 'DATABASE_URL', 'GOOGLE_CLIENT_ID'];
 const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
 
 if (missingEnvVars.length > 0) {
@@ -58,7 +58,7 @@ const corsOptions = {
     }
 
     console.warn('Blocked by CORS:', origin);
-    return callback(null, false);
+    return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
   methods: allowedMethods,
@@ -67,25 +67,8 @@ const corsOptions = {
   maxAge: 86400,
 };
 
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  const requestHeaders = req.headers['access-control-request-headers'];
-
-  res.set('Vary', 'Origin');
-
-  if (origin && allowedOrigins.includes(origin)) {
-    res.set('Access-Control-Allow-Origin', origin);
-    res.set('Access-Control-Allow-Credentials', 'true');
-    res.set('Access-Control-Allow-Methods', allowedMethods);
-    res.set('Access-Control-Allow-Headers', requestHeaders || defaultAllowedHeaders);
-  }
-
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
-  }
-
-  next();
-});
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 console.log('CORS allowed origins:', allowedOrigins);
 
