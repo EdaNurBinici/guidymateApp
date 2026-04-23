@@ -3,7 +3,7 @@ require("dotenv").config();
 console.log("🚀 Server starting... Version:", new Date().toISOString());
 
 // Check required environment variables
-const requiredEnvVars = ['GROQ_API_KEY', 'JWT_SECRET', 'DATABASE_URL', 'GOOGLE_CLIENT_ID'];
+const requiredEnvVars = ['JWT_SECRET', 'DATABASE_URL'];
 const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
 
 if (missingEnvVars.length > 0) {
@@ -19,7 +19,9 @@ const jwt = require("jsonwebtoken");
 const Groq = require("groq-sdk");
 const { OAuth2Client } = require('google-auth-library');
 
-const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const googleClient = process.env.GOOGLE_CLIENT_ID
+  ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+  : null;
 
 let authMiddleware;
 try {
@@ -77,11 +79,15 @@ const pool = new Pool({
 
 let groq;
 try {
-  groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-  console.log("✅ Groq client initialized successfully");
+  if (process.env.GROQ_API_KEY) {
+    groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+    console.log("Groq client initialized successfully");
+  } else {
+    console.warn("GROQ_API_KEY is missing. AI endpoints will stay disabled.");
+  }
 } catch (error) {
-  console.error("❌ Failed to initialize Groq client:", error.message);
-  process.exit(1);
+  console.error("Failed to initialize Groq client:", error.message);
+  groq = null;
 }
 
 async function saveMsg(pool, { userId, sessionId, role, content }) {
@@ -159,6 +165,9 @@ app.post("/login", async (req, res) => {
 
 app.post("/auth/google", async (req, res) => {
   try {
+    if (!googleClient || !process.env.GOOGLE_CLIENT_ID) {
+      return res.status(503).json({ message: "Google login is not configured." });
+    }
     const { credential } = req.body;
 
     const ticket = await googleClient.verifyIdToken({
@@ -293,6 +302,9 @@ RULES:
 
 app.post("/coach/start", authMiddleware, async (req, res) => {
   try {
+    if (!groq) {
+      return res.status(503).json({ message: "AI service is not configured." });
+    }
     const userId = req.userId;
     const { language = 'tr' } = req.body; // Dil parametresi
     console.log("🌍 Coach Start - Language:", language); // DEBUG
@@ -340,6 +352,9 @@ app.post("/coach/start", authMiddleware, async (req, res) => {
 
 app.post("/coach/reply", authMiddleware, async (req, res) => {
   try {
+    if (!groq) {
+      return res.status(503).json({ message: "AI service is not configured." });
+    }
     const userId = req.userId;
     const { sessionId, userMessage, language = 'tr' } = req.body;
     console.log("🌍 Coach Reply - Language:", language);
@@ -415,6 +430,10 @@ app.post("/roadmap/generate", authMiddleware, async (req, res) => {
   let currentLevel = 1;
 
   try {
+    if (!groq) {
+      return res.status(503).json({ success: false, message: "AI service is not configured." });
+    }
+
     const profRes = await pool.query("SELECT * FROM users_profiles WHERE user_id = $1", [userId]);
     const p = profRes.rows[0];
 
@@ -617,3 +636,4 @@ app.delete("/notes/:id", authMiddleware, async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => { console.log(`Server ${PORT} portunda çalışıyor... 🚀`); });
+
