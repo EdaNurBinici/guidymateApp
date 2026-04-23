@@ -51,9 +51,13 @@ const allowedOrigins = [...new Set([...defaultAllowedOrigins, ...envAllowedOrigi
 
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    // Eğer allowedOrigins boşsa, default'ları kullan
+    const finalAllowedOrigins = allowedOrigins.length > 0 ? allowedOrigins : defaultAllowedOrigins;
+    
+    if (!origin || finalAllowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.warn('❌ CORS blocked for origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
