@@ -653,27 +653,32 @@ function App() {
 
   const handleGoogleLogin = async (credentialResponse) => {
     try {
+      if (!credentialResponse?.credential) {
+        setMessage("Google token alinamadi. Client ID ayarlarini kontrol et.");
+        return;
+      }
+
       const res = await fetch(`${API_URL}/auth/google`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ credential: credentialResponse.credential }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       
       if (res.ok) {
         localStorage.setItem("token", data.token);
         setUserId(data.userId);
         checkProfile(data.userId);
         showToast(t.googleLoginSuccess);
+        setMessage("");
       } else {
-        setMessage(data.message || "Google ile giriş başarısız");
+        setMessage(data.message || "Google login failed.");
       }
     } catch (error) {
       logger.error("Google login error:", error);
-      setMessage("⚠️ Bağlantı hatası. Lütfen tekrar dene.");
+      setMessage("Baglanti hatasi. Lutfen tekrar dene.");
     }
   };
-
   useEffect(() => {
     if (userId) {
       if (activeTab === "notes") fetchNotes();

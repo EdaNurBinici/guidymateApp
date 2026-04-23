@@ -168,20 +168,23 @@ app.post("/auth/google", async (req, res) => {
     if (!googleClient || !process.env.GOOGLE_CLIENT_ID) {
       return res.status(503).json({ message: "Google login is not configured." });
     }
+
     const { credential } = req.body;
+    if (!credential) {
+      return res.status(400).json({ message: "Google credential is missing." });
+    }
 
     const ticket = await googleClient.verifyIdToken({
       idToken: credential,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
-    
+
     const payload = ticket.getPayload();
     const { email, name, sub: googleId } = payload;
 
     let user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-    
-    if (user.rows.length === 0) {
 
+    if (user.rows.length === 0) {
       const result = await pool.query(
         "INSERT INTO users (name, email, password, google_id) VALUES ($1, $2, $3, $4) RETURNING id",
         [name, email, 'google_oauth', googleId]
@@ -190,11 +193,23 @@ app.post("/auth/google", async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user.rows[0].id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-    res.json({ message: "Google ile giriş başarılı!", token, userId: user.rows[0].id });
-    
+    res.json({ message: "Google login successful.", token, userId: user.rows[0].id });
   } catch (err) {
     console.error("Google auth error:", err);
-    res.status(500).json({ message: "Google ile giriş başarısız" });
+
+    const errorText = String(err?.message || "").toLowerCase();
+    if (
+      errorText.includes("wrong recipient") ||
+      errorText.includes("wrong number of segments") ||
+      errorText.includes("token used too late") ||
+      errorText.includes("token used too early") ||
+      errorText.includes("invalid token") ||
+      errorText.includes("jwt")
+    ) {
+      return res.status(401).json({ message: "Invalid Google token or client configuration." });
+    }
+
+    res.status(500).json({ message: "Google login failed." });
   }
 });
 
