@@ -1,8 +1,0 @@
-{
-  "build": {
-    "builder": "nixpacks"
-  },
-  "deploy": {
-    "startCommand": "cd web-app-api && npm start"
-  }
-}
