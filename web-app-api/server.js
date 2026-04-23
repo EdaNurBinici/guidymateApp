@@ -137,6 +137,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.options('*', cors(corsOptions));
+
 app.post("/auth/google", async (req, res) => {
   try {
     const { credential } = req.body;
