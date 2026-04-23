@@ -30,12 +30,16 @@ try {
 
 const app = express();
 
-// CORS configuration - more permissive for debugging
+// CORS configuration - explicit headers
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://guidymate.com.tr');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  const origin = req.headers.origin;
+  if (origin === 'https://guidymate.com.tr' || origin === 'https://www.guidymate.com.tr') {
+    res.set('Access-Control-Allow-Origin', origin);
+  }
+  res.set('Access-Control-Allow-Credentials', 'true');
+  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.set('Access-Control-Max-Age', '86400');
   
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
