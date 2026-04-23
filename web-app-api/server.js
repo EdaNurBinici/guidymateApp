@@ -65,6 +65,12 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 
+// Add COOP header for Google OAuth popup
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  next();
+});
+
 console.log('✅ CORS configured for origins:', allowedOrigins);
 
 app.use(express.json());
