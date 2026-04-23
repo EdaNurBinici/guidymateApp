@@ -33,17 +33,27 @@ const app = express();
 // CORS configuration - explicit headers
 app.use((req, res, next) => {
   const origin = req.headers.origin;
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    if (origin === 'https://guidymate.com.tr' || origin === 'https://www.guidymate.com.tr') {
+      res.set('Access-Control-Allow-Origin', origin);
+    }
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD');
+    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.set('Access-Control-Max-Age', '86400');
+    return res.sendStatus(200);
+  }
+  
+  // Handle regular requests
   if (origin === 'https://guidymate.com.tr' || origin === 'https://www.guidymate.com.tr') {
     res.set('Access-Control-Allow-Origin', origin);
   }
   res.set('Access-Control-Allow-Credentials', 'true');
   res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD');
   res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  res.set('Access-Control-Max-Age', '86400');
   
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
   next();
 });
 
