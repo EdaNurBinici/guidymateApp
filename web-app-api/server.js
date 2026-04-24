@@ -63,9 +63,6 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 
-// Handle preflight explicitly
-app.options('*', cors());
-
 // Remove COOP header - it blocks Google OAuth postMessage
 app.use((req, res, next) => {
   res.removeHeader('Cross-Origin-Opener-Policy');
