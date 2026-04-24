@@ -6,7 +6,7 @@ import { useWindowSize } from "./hooks/useWindowSize";
 import ThemeToggle from "./components/ThemeToggle";
 import LanguageToggle from "./components/LanguageToggle";
 import ConfirmModal from "./components/ConfirmModal";
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import { apiCall, logger } from "./utils/api";
 import { useTranslation } from "./i18n/translations";
 
@@ -651,6 +651,45 @@ function App() {
     }
   };
 
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  const googleLoginWithRedirect = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        // access_token ile userinfo al
+        const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        });
+        const userInfo = await userInfoRes.json();
+
+        const res = await fetch(`${API_URL}/auth/google/token`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ access_token: tokenResponse.access_token, userInfo }),
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok) {
+          localStorage.setItem("token", data.token);
+          setUserId(data.userId);
+          checkProfile(data.userId);
+          showToast(t.googleLoginSuccess);
+          setMessage("");
+        } else {
+          setMessage(data.message || "Google login failed.");
+        }
+      } catch (error) {
+        logger.error("Google login error:", error);
+        setMessage("Bağlantı hatası. Lütfen tekrar dene.");
+      }
+    },
+    onError: (error) => {
+      console.error('Google Login Error:', error);
+      setMessage("❌ Google ile giriş başarısız. Lütfen tekrar dene.");
+    },
+    flow: 'implicit',
+  });
+
   const handleGoogleLogin = async (credentialResponse) => {
     try {
       if (!credentialResponse?.credential) {
@@ -810,6 +849,29 @@ function App() {
               <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
                 <div style={{ width: "100%", maxWidth: "400px" }}>
                   <p style={{ color: "#718096", marginBottom: "15px", textAlign: "center" }}>{t.orText}</p>
+                  {isIOS ? (
+                    <button
+                      onClick={() => googleLoginWithRedirect()}
+                      style={{
+                        width: "100%",
+                        padding: "10px 16px",
+                        border: "1px solid #dadce0",
+                        borderRadius: "4px",
+                        background: "#fff",
+                        color: "#3c4043",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "8px",
+                      }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/><path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/><path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z"/><path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"/></svg>
+                      {view === "login" ? "Google ile Giriş Yap" : "Google ile Kayıt Ol"}
+                    </button>
+                  ) : (
                   <GoogleLogin
                     onSuccess={handleGoogleLogin}
                     onError={(error) => {
@@ -821,10 +883,10 @@ function App() {
                     theme="outline"
                     size="large"
                     width="400"
-                    ux_mode="popup"
                     useOneTap={false}
                     auto_select={false}
                   />
+                  )}
                 </div>
               </div>
             </div>

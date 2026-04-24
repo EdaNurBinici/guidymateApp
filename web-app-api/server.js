@@ -169,6 +169,46 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/auth/google/token", async (req, res) => {
+  try {
+    if (!process.env.GOOGLE_CLIENT_ID) {
+      return res.status(503).json({ message: "Google login is not configured." });
+    }
+
+    const { access_token, userInfo } = req.body;
+    if (!access_token || !userInfo) {
+      return res.status(400).json({ message: "Missing access_token or userInfo." });
+    }
+
+    // Verify the access token with Google
+    const verifyRes = await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${access_token}`);
+    if (!verifyRes.ok) {
+      return res.status(401).json({ message: "Invalid Google access token." });
+    }
+
+    const { email, name, sub: googleId } = userInfo;
+    if (!email) {
+      return res.status(400).json({ message: "Could not get email from Google." });
+    }
+
+    let user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+
+    if (user.rows.length === 0) {
+      const result = await pool.query(
+        "INSERT INTO users (name, email, password, google_id) VALUES ($1, $2, $3, $4) RETURNING id",
+        [name, email, 'google_oauth', googleId]
+      );
+      user = await pool.query("SELECT * FROM users WHERE id = $1", [result.rows[0].id]);
+    }
+
+    const token = jwt.sign({ userId: user.rows[0].id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    res.json({ message: "Google login successful.", token, userId: user.rows[0].id });
+  } catch (err) {
+    console.error("Google token auth error:", err);
+    res.status(500).json({ message: "Google login failed." });
+  }
+});
+
 app.post("/auth/google", async (req, res) => {
   try {
     if (!googleClient || !process.env.GOOGLE_CLIENT_ID) {
