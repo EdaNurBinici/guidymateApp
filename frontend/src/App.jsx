@@ -1829,7 +1829,7 @@ function App() {
                 </>
               )}
 
-              <h2 style={{ color: isBreak ? "#48bb78" : "white", textShadow: "2px 2px 4px rgba(0,0,0,0.3)" }}>
+              <h2 style={{ color: isBreak ? "#48bb78" : "white", textShadow: "2px 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0,0.4)" }}>
                 {isBreak ? (language === 'en' ? 'BREAK TIME' : 'MOLA VAKTİ') : (language === 'en' ? 'STUDY TIME' : 'DERS VAKTİ')}
               </h2>
               <div className="timer-display" style={{ color: "white", textShadow: "3px 3px 6px rgba(0,0,0,0.4)" }}>
