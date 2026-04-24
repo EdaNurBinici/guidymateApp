@@ -34,41 +34,4 @@ logs/
 *.swp
 *.swo
 *~
-
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Temporary files
-*.tmp
-temp/
-tmp/
-backend/tempCodeRunnerFile.js
-web-app-api/tempCodeRunnerFile.js
-
-# Personal files (Windows shortcuts, etc.)
-*.lnk
-*.url
-
-# Project-specific ignores
-plugins/
-uploads/
-DERS/
-c++/
-c++1/
-APP/
-*.zip
-*.rar
-*.py
-*.pptx
-*.csv
-*.bat
-*.cmd
-*.php
-cgi-bin/
-goodbyedpi*/
-!frontend/index.html
-
-# Kiro IDE files
 .kiro/
