@@ -35,6 +35,7 @@ const app = express();
 const defaultAllowedOrigins = [
   'https://guidymate.com.tr',
   'https://www.guidymate.com.tr',
+  'https://guidymateapp-production.up.railway.app',
   'http://localhost:5173',
   'http://localhost:3000',
 ];
@@ -65,9 +66,9 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 
-// Add COOP header for Google OAuth popup
+// Add COOP header for Google OAuth - unsafe-none allows popups from any origin
 app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  res.setHeader('Cross-Origin-Opener-Policy', 'unsafe-none');
   next();
 });
 
