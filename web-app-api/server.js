@@ -40,6 +40,9 @@ const defaultAllowedOrigins = [
   'http://localhost:3000',
 ];
 
+console.log('🔍 ENV ALLOWED_ORIGINS:', process.env.ALLOWED_ORIGINS);
+console.log('🔍 ENV FRONTEND_URL:', process.env.FRONTEND_URL);
+
 const envAllowedOrigins = [
   process.env.FRONTEND_URL,
   process.env.CORS_ORIGIN,
