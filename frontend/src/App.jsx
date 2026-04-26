@@ -165,8 +165,14 @@ function App() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+  
+  const prevMessagesLength = useRef(coachMessages.length);
+  
   useEffect(() => {
-    scrollToBottom();
+    if (coachMessages.length > prevMessagesLength.current) {
+      scrollToBottom();
+    }
+    prevMessagesLength.current = coachMessages.length;
   }, [coachMessages]);
 
   const showToast = (msg) => {
